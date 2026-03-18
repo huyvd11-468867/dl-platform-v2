@@ -26,3 +26,4 @@ docker-compose.override.yml
 
 # Vercel
 .vercel
+.env
