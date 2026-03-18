@@ -1,0 +1,3947 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HuyHaha · Deep Learning Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN SYSTEM — HuyHaha DL Academy
+   Aesthetic: Editorial · Refined · Premium Dark
+   ═══════════════════════════════════════════════ */
+:root {
+  /* Core palette */
+  --ink: #0A0A0F;
+  --ink-90: #111118;
+  --ink-80: #16161F;
+  --ink-70: #1C1C28;
+  --ink-60: #252535;
+  --ink-50: #333348;
+  --ink-30: #5A5A7A;
+  --ink-20: #8585A8;
+  --ink-10: #B8B8D4;
+  --ink-05: #E8E8F5;
+  --white: #FFFFFF;
+  --off-white: #F7F7FC;
+  --paper: #FAFAFA;
+
+  /* Accent — electric indigo */
+  --a: #5B5FEF;
+  --a-bright: #7B7FF8;
+  --a-glow: rgba(91,95,239,0.18);
+  --a-subtle: rgba(91,95,239,0.08);
+
+  /* Status */
+  --green: #00C896;
+  --green-bg: rgba(0,200,150,0.10);
+  --amber: #F59E0B;
+  --amber-bg: rgba(245,158,11,0.10);
+  --red: #EF4444;
+  --red-bg: rgba(239,68,68,0.10);
+  --blue: #3B82F6;
+  --blue-bg: rgba(59,130,246,0.10);
+
+  /* Module colors */
+  --ml:  #F59E0B;
+  --nlp: #8B5CF6;
+  --cv:  #10B981;
+  --adl: #EF4444;
+  --srv: #3B82F6;
+  --ops: #F97316;
+
+  /* Layout */
+  --sidebar-w: 268px;
+  --topbar-h: 60px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,.4), 0 1px 2px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.45), 0 2px 6px rgba(0,0,0,.3);
+  --shadow-lg: 0 20px 48px rgba(0,0,0,.5), 0 8px 16px rgba(0,0,0,.35);
+  --shadow-glow: 0 0 0 1px var(--a), 0 0 24px var(--a-glow);
+
+  /* Type */
+  --font-ui: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-code: 'DM Mono', 'Fira Code', monospace;
+
+  /* Radius */
+  --r-sm: 8px;
+  --r: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-ui);
+  background: var(--ink);
+  color: var(--off-white);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--ink-50); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--ink-30); }
+
+/* ════════════════════════════════
+   LAYOUT
+   ════════════════════════════════ */
+.shell { display: flex; height: 100vh; overflow: hidden; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--ink-90);
+  border-right: 1px solid rgba(255,255,255,.055);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 80;
+  overflow: hidden;
+}
+
+/* Subtle grid texture on sidebar */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.03) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.sidebar-brand {
+  padding: 22px 22px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  position: relative;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.brand-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--a) 0%, var(--a-bright) 100%);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-code);
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  box-shadow: 0 4px 12px rgba(91,95,239,.4);
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -.3px;
+}
+
+.brand-tagline {
+  font-size: 11px;
+  color: var(--ink-20);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding-left: 46px;
+}
+
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 10px;
+}
+
+.nav-section {
+  margin-bottom: 6px;
+}
+
+.nav-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-30);
+  padding: 10px 10px 5px;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: var(--r-sm);
+  border: none;
+  background: transparent;
+  color: var(--ink-10);
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all .15s var(--ease);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1px;
+}
+
+.nav-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--a-subtle);
+  opacity: 0;
+  transition: opacity .15s;
+  border-radius: var(--r-sm);
+}
+
+.nav-btn:hover { color: var(--white); }
+.nav-btn:hover::before { opacity: 1; }
+
+.nav-btn.active {
+  background: var(--a-subtle);
+  color: var(--white);
+  box-shadow: inset 0 0 0 1px rgba(91,95,239,.25);
+}
+
+.nav-btn.active .nav-icon { color: var(--a-bright); }
+
+.nav-icon {
+  width: 18px; height: 18px;
+  flex-shrink: 0;
+  color: var(--ink-20);
+  transition: color .15s;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.nav-label { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.nav-chip {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.07);
+  color: var(--ink-20);
+  font-family: var(--font-code);
+  flex-shrink: 0;
+}
+.nav-btn.active .nav-chip { background: var(--a-subtle); color: var(--a-bright); }
+
+.nav-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: .75;
+}
+
+/* Module sub-nav */
+.module-subnav {
+  padding: 2px 0 4px 28px;
+  display: none;
+}
+.module-subnav.open { display: block; }
+
+.subnav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--r-sm);
+  font-size: 12.5px;
+  color: var(--ink-20);
+  cursor: pointer;
+  transition: all .12s;
+  margin-bottom: 1px;
+}
+.subnav-item:hover { color: var(--ink-05); background: rgba(255,255,255,.04); }
+.subnav-item.active { color: var(--a-bright); }
+.subnav-item::before { content: '·'; color: var(--ink-30); margin-right: 2px; }
+
+/* Sidebar footer */
+.sidebar-footer {
+  padding: 14px 14px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.api-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--ink-80);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(255,255,255,.06);
+  cursor: pointer;
+  transition: all .15s;
+}
+.api-pill:hover { border-color: rgba(255,255,255,.12); }
+
+.api-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+  flex-shrink: 0;
+  animation: pulse-dot 2s infinite;
+}
+.api-dot.ok { background: var(--green); box-shadow: 0 0 6px var(--green); }
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+.api-text { font-size: 11.5px; color: var(--ink-20); flex: 1; font-weight: 500; }
+.api-action { font-size: 11px; color: var(--a-bright); font-weight: 600; cursor: pointer; }
+
+/* ── MAIN ── */
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--ink-80);
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  height: var(--topbar-h);
+  background: var(--ink-90);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 16px;
+  flex-shrink: 0;
+  z-index: 40;
+  position: relative;
+}
+
+.topbar-crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-20);
+  flex: 1;
+}
+
+.crumb-sep { color: var(--ink-30); }
+.crumb-current { color: var(--off-white); font-weight: 600; }
+
+/* View toggle */
+.view-toggle {
+  display: flex;
+  background: var(--ink-80);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r-sm);
+  padding: 3px;
+  gap: 2px;
+}
+
+.view-tab {
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-20);
+  cursor: pointer;
+  transition: all .15s;
+  border: none;
+  background: transparent;
+  font-family: var(--font-ui);
+}
+.view-tab.active {
+  background: var(--ink-60);
+  color: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.topbar-action {
+  padding: 7px 16px;
+  background: var(--a);
+  color: white;
+  border: none;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  transition: all .15s;
+  display: none;
+}
+.topbar-action:hover { background: var(--a-bright); transform: translateY(-1px); }
+
+/* ── CONTENT AREA ── */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* ════════════════════════════════
+   PAGES
+   ════════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── DASHBOARD ── */
+.dashboard { padding: 36px 36px 80px; max-width: 1200px; }
+
+/* Hero */
+.hero {
+  position: relative;
+  background: var(--ink-70);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r-xl);
+  padding: 48px 52px;
+  margin-bottom: 32px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 95% 50%, rgba(91,95,239,.15) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 5% 80%, rgba(139,92,246,.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse at 100% 50%, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--a-bright);
+  margin-bottom: 14px;
+  background: var(--a-subtle);
+  border: 1px solid rgba(91,95,239,.2);
+  padding: 5px 12px;
+  border-radius: 99px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--a-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--a);
+}
+
+.hero-heading {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -.5px;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+
+.hero-heading em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--a-bright);
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--ink-10);
+  max-width: 520px;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.hero-stat {}
+.hero-stat-value {
+  font-family: var(--font-code);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat-label { font-size: 12px; color: var(--ink-20); font-weight: 500; }
+.hero-stat-value span { font-size: 16px; color: var(--a-bright); }
+
+/* Section heading */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -.2px;
+}
+
+.section-count {
+  font-size: 12px;
+  color: var(--ink-20);
+  font-family: var(--font-code);
+}
+
+/* Module cards grid */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.module-card {
+  background: var(--ink-70);
+  border: 1px solid rgba(255,255,255,.065);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideUp .4s var(--ease) both;
+}
+
+.module-card:nth-child(1) { animation-delay: .05s; }
+.module-card:nth-child(2) { animation-delay: .10s; }
+.module-card:nth-child(3) { animation-delay: .15s; }
+.module-card:nth-child(4) { animation-delay: .20s; }
+.module-card:nth-child(5) { animation-delay: .25s; }
+.module-card:nth-child(6) { animation-delay: .30s; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent-c, var(--a));
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.module-card:hover {
+  border-color: rgba(255,255,255,.13);
+  background: var(--ink-60);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.module-card:hover::before { opacity: 1; }
+
+.module-card-glow {
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: .12;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.module-card:hover .module-card-glow { opacity: .22; }
+
+.module-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  border: 1px solid;
+}
+
+.module-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  letter-spacing: -.2px;
+  line-height: 1.3;
+}
+
+.module-card-desc {
+  font-size: 13px;
+  color: var(--ink-10);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  min-height: 52px;
+}
+
+.module-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+.module-meta-item {
+  flex: 1;
+  text-align: center;
+}
+
+.module-meta-value {
+  font-family: var(--font-code);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.module-meta-label {
+  font-size: 10.5px;
+  color: var(--ink-20);
+  font-weight: 500;
+}
+
+.module-meta-div {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,.06);
+}
+
+/* ── MODULE PAGE ── */
+.module-page { padding: 36px 36px 80px; max-width: 1000px; }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink-20);
+  cursor: pointer;
+  margin-bottom: 28px;
+  transition: color .15s;
+  font-weight: 500;
+  border: none;
+  background: none;
+  font-family: var(--font-ui);
+  padding: 0;
+}
+.back-link:hover { color: var(--off-white); }
+.back-link svg { width: 14px; height: 14px; }
+
+.module-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 36px;
+  padding: 32px;
+  background: var(--ink-70);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r-lg);
+}
+
+.module-hero-icon {
+  width: 56px; height: 56px;
+  border-radius: var(--r);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.module-hero-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: -.3px;
+}
+
+.module-hero-desc { font-size: 14px; color: var(--ink-10); line-height: 1.65; }
+
+.topic-cards { display: flex; flex-direction: column; gap: 12px; }
+
+.topic-card {
+  background: var(--ink-70);
+  border: 1px solid rgba(255,255,255,.065);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  transition: all .18s var(--ease);
+  animation: fadeSlideUp .35s var(--ease) both;
+}
+
+.topic-card:hover {
+  background: var(--ink-60);
+  border-color: rgba(255,255,255,.12);
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.topic-card-num {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-code);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--a-bright);
+  background: var(--a-subtle);
+  border: 1px solid rgba(91,95,239,.2);
+  flex-shrink: 0;
+}
+
+.topic-card-body { flex: 1; min-width: 0; }
+.topic-card-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.topic-card-meta { display: flex; align-items: center; gap: 14px; }
+.topic-card-meta-item { font-size: 12px; color: var(--ink-20); display: flex; align-items: center; gap: 5px; }
+
+.topic-card-badges { display: flex; gap: 6px; flex-shrink: 0; }
+.difficulty-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.diff-basic { background: var(--green-bg); color: var(--green); border: 1px solid rgba(0,200,150,.2); }
+.diff-medium { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(245,158,11,.2); }
+.diff-hard { background: var(--red-bg); color: var(--red); border: 1px solid rgba(239,68,68,.2); }
+
+.topic-card-arrow { color: var(--ink-30); transition: transform .15s; }
+.topic-card:hover .topic-card-arrow { transform: translateX(3px); color: var(--ink-10); }
+
+/* ── TOPIC LESSON PAGE ── */
+.lesson-layout {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Left: lesson content */
+.lesson-main {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 36px 40px 100px;
+}
+
+/* Right: exercise panel */
+.lesson-panel {
+  width: 400px;
+  min-width: 400px;
+  background: var(--ink-90);
+  border-left: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: all .3s var(--ease);
+}
+
+.lesson-panel.collapsed { width: 0; min-width: 0; overflow: hidden; }
+
+/* Theory content */
+.theory-wrap {
+  max-width: 720px;
+}
+
+.lesson-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.2;
+  letter-spacing: -.4px;
+  margin-bottom: 10px;
+}
+
+.lesson-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.lesson-meta-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ink-20);
+  font-weight: 500;
+}
+
+/* Concept tags */
+.concepts-section {
+  background: linear-gradient(135deg, var(--a-subtle) 0%, rgba(139,92,246,.06) 100%);
+  border: 1px solid rgba(91,95,239,.18);
+  border-radius: var(--r);
+  padding: 20px 22px;
+  margin-bottom: 28px;
+}
+
+.concepts-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--a-bright);
+  margin-bottom: 12px;
+}
+
+.concepts-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.concept-tag {
+  padding: 5px 12px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 99px;
+  font-size: 12px;
+  color: var(--ink-05);
+  font-weight: 500;
+  transition: all .15s;
+  cursor: default;
+}
+.concept-tag:hover { background: var(--a-subtle); border-color: rgba(91,95,239,.3); color: var(--a-bright); }
+
+/* Rich text content */
+.rich-content h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--white);
+  margin: 36px 0 12px;
+  letter-spacing: -.3px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.rich-content h2:first-child { margin-top: 0; }
+
+.rich-content h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--off-white);
+  margin: 22px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rich-content h3::before {
+  content: '';
+  width: 3px; height: 16px;
+  background: var(--a-bright);
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+
+.rich-content p {
+  font-size: 14.5px;
+  color: var(--ink-10);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.rich-content ul, .rich-content ol {
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+.rich-content li {
+  font-size: 14.5px;
+  color: var(--ink-10);
+  line-height: 1.75;
+  margin-bottom: 6px;
+}
+
+.rich-content strong { color: var(--white); font-weight: 700; }
+
+.rich-content code {
+  background: rgba(91,95,239,.15);
+  border: 1px solid rgba(91,95,239,.2);
+  color: var(--a-bright);
+  font-family: var(--font-code);
+  font-size: 12.5px;
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+
+.rich-content pre {
+  background: var(--ink);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r);
+  padding: 20px 22px;
+  overflow-x: auto;
+  margin: 16px 0;
+  position: relative;
+}
+
+.rich-content pre::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 10px; right: 14px;
+  font-family: var(--font-code);
+  font-size: 10px;
+  color: var(--ink-30);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rich-content pre code {
+  background: none;
+  border: none;
+  color: #e6edf3;
+  font-size: 13px;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* ════════════════════════════════
+   EXERCISE PANEL (RIGHT SIDE)
+   ════════════════════════════════ */
+.panel-header {
+  padding: 20px 22px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.panel-counter {
+  font-family: var(--font-code);
+  font-size: 11px;
+  color: var(--ink-20);
+  background: var(--ink-70);
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.panel-exercise-tabs {
+  display: flex;
+  gap: 0;
+  padding: 12px 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  overflow-x: auto;
+}
+
+.panel-tab {
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-20);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .15s;
+  background: none;
+  border-top: none; border-left: none; border-right: none;
+  font-family: var(--font-ui);
+}
+.panel-tab:hover { color: var(--ink-05); }
+.panel-tab.active { color: var(--a-bright); border-bottom-color: var(--a-bright); }
+
+.panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 20px;
+}
+
+/* Exercise content */
+.ex-header { margin-bottom: 18px; }
+
+.ex-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ex-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.35;
+}
+
+.ex-desc {
+  font-size: 13px;
+  color: var(--ink-10);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.ex-concepts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+
+.ex-concept-tag {
+  font-size: 10.5px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--ink-60);
+  color: var(--ink-10);
+  border: 1px solid rgba(255,255,255,.07);
+}
+
+/* Code block in exercise */
+.code-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-30);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.code-label::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--a-bright);
+  border-radius: 50%;
+}
+
+.starter-code {
+  background: var(--ink);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--r-sm);
+  padding: 14px 16px;
+  font-family: var(--font-code);
+  font-size: 12px;
+  color: #e6edf3;
+  overflow-x: auto;
+  white-space: pre;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.answer-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-30);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.answer-label::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+}
+
+.answer-textarea {
+  width: 100%;
+  background: var(--ink-80);
+  border: 1.5px solid rgba(255,255,255,.08);
+  border-radius: var(--r-sm);
+  padding: 13px 15px;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--off-white);
+  min-height: 120px;
+  resize: vertical;
+  outline: none;
+  line-height: 1.65;
+  transition: border-color .15s;
+}
+
+.answer-textarea:focus { border-color: var(--a); }
+.answer-textarea::placeholder { color: var(--ink-30); }
+
+/* Submit row */
+.submit-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all .15s var(--ease);
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--a);
+  color: white;
+  box-shadow: 0 2px 8px rgba(91,95,239,.3);
+}
+.btn-primary:hover { background: var(--a-bright); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(91,95,239,.4); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-20);
+  border: 1px solid rgba(255,255,255,.09);
+}
+.btn-ghost:hover { color: var(--off-white); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.05); }
+
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+/* Score & feedback */
+.grading-card {
+  margin-top: 16px;
+  background: var(--ink-80);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r);
+  overflow: hidden;
+  animation: fadeSlideUp .3s var(--ease) both;
+}
+
+.grading-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grade-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink-20);
+}
+
+.score-badge-large {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.score-num {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.score-denom { font-size: 14px; color: var(--ink-20); font-weight: 600; }
+
+.grading-body { padding: 18px; }
+
+.feedback-text {
+  font-size: 13.5px;
+  color: var(--ink-05);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,.04);
+  border-radius: var(--r-sm);
+  border-left: 3px solid var(--a);
+}
+
+.breakdown-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.breakdown-cell {
+  text-align: center;
+  padding: 12px 8px;
+  background: rgba(255,255,255,.04);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+.breakdown-val {
+  font-family: var(--font-code);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.breakdown-key { font-size: 10px; color: var(--ink-20); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+.feedback-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.feedback-col { }
+.feedback-col-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin-bottom: 8px;
+}
+.feedback-col-title.good { color: var(--green); }
+.feedback-col-title.improve { color: var(--amber); }
+
+.feedback-list { list-style: none; }
+.feedback-list li {
+  font-size: 12.5px;
+  color: var(--ink-10);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,.04);
+  line-height: 1.5;
+  display: flex;
+  gap: 7px;
+}
+.feedback-list li::before { flex-shrink: 0; }
+.feedback-col.good .feedback-list li::before { content: '✓'; color: var(--green); font-weight: 700; }
+.feedback-col.improve .feedback-list li::before { content: '→'; color: var(--amber); font-weight: 700; }
+
+.encouragement {
+  background: var(--a-subtle);
+  border: 1px solid rgba(91,95,239,.18);
+  border-radius: var(--r-sm);
+  padding: 10px 13px;
+  font-size: 12.5px;
+  color: var(--a-bright);
+  font-style: italic;
+}
+
+/* Loading state */
+.grading-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 12px;
+}
+
+.spinner {
+  width: 28px; height: 28px;
+  border: 2.5px solid rgba(91,95,239,.2);
+  border-top-color: var(--a-bright);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text {
+  font-size: 13px;
+  color: var(--ink-20);
+  animation: pulse .8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse { from { opacity: .5; } to { opacity: 1; } }
+
+/* ═══════════════════════════
+   SETTINGS PAGE
+   ═══════════════════════════ */
+.settings-page {
+  max-width: 680px;
+  padding: 40px 40px 80px;
+  margin: 0 auto;
+}
+
+.settings-heading {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+  letter-spacing: -.3px;
+}
+
+.settings-sub { font-size: 14px; color: var(--ink-20); margin-bottom: 36px; }
+
+.settings-card {
+  background: var(--ink-70);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: var(--r-lg);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.settings-card-header {
+  padding: 22px 26px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.settings-card-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.settings-card-desc { font-size: 13px; color: var(--ink-20); line-height: 1.65; }
+
+.settings-card-body { padding: 22px 26px; }
+
+.form-group { margin-bottom: 18px; }
+
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-10);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  background: var(--ink-80);
+  border: 1.5px solid rgba(255,255,255,.08);
+  border-radius: var(--r-sm);
+  padding: 11px 15px;
+  font-family: var(--font-code);
+  font-size: 13.5px;
+  color: var(--off-white);
+  outline: none;
+  transition: border-color .15s;
+}
+.form-input:focus { border-color: var(--a); }
+.form-input::placeholder { color: var(--ink-30); }
+
+.form-hint { font-size: 12px; color: var(--ink-30); margin-top: 6px; }
+
+.notify {
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  font-weight: 500;
+  display: none;
+  margin-top: 12px;
+  border: 1px solid;
+}
+.notify.show { display: block; }
+.notify.success { background: var(--green-bg); color: var(--green); border-color: rgba(0,200,150,.25); }
+.notify.error { background: var(--red-bg); color: var(--red); border-color: rgba(239,68,68,.2); }
+
+/* Info grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.info-item {
+  padding: 14px 16px;
+  background: var(--ink-80);
+  border-radius: var(--r-sm);
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+.info-item-label { font-size: 11px; color: var(--ink-30); font-weight: 600; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .5px; }
+.info-item-value { font-size: 14px; color: var(--off-white); font-weight: 600; }
+
+/* ═══════════════════════════
+   CHATBOT
+   ═══════════════════════════ */
+.chatbot-trigger {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.chatbot-fab {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--a) 0%, #7B7FF8 100%);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(91,95,239,.45);
+  transition: all .2s var(--ease-spring);
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
+  font-family: var(--font-code);
+}
+
+.chatbot-fab:hover { transform: scale(1.08); box-shadow: 0 12px 32px rgba(91,95,239,.55); }
+.chatbot-fab.open { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); box-shadow: 0 8px 24px rgba(239,68,68,.4); }
+
+.chatbot-window {
+  position: fixed;
+  bottom: 92px;
+  right: 28px;
+  width: 390px;
+  height: 560px;
+  background: var(--ink-90);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+  z-index: 299;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: bottom right;
+  transition: all .25s var(--ease-spring);
+  transform: scale(.95) translateY(8px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chatbot-window.open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.chat-header {
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ink-80);
+}
+
+.chat-avatar {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--a) 0%, var(--a-bright) 100%);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 600;
+  color: white;
+  flex-shrink: 0;
+}
+
+.chat-header-info { flex: 1; }
+.chat-header-name { font-size: 14px; font-weight: 700; color: var(--white); }
+.chat-header-status { font-size: 11.5px; color: var(--green); font-weight: 500; display: flex; align-items: center; gap: 5px; }
+.chat-header-status::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--green);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.chat-bubble {
+  max-width: 88%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.chat-bubble.bot {
+  background: var(--ink-70);
+  border: 1px solid rgba(255,255,255,.07);
+  color: var(--ink-05);
+  align-self: flex-start;
+  border-radius: 14px 14px 14px 4px;
+}
+
+.chat-bubble.user {
+  background: var(--a);
+  color: white;
+  align-self: flex-end;
+  border-radius: 14px 14px 4px 14px;
+}
+
+.chat-bubble.bot code {
+  background: rgba(255,255,255,.1);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: var(--font-code);
+  font-size: 12px;
+}
+
+.chat-input-row {
+  padding: 14px 16px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  gap: 10px;
+  background: var(--ink-80);
+}
+
+.chat-input {
+  flex: 1;
+  background: var(--ink-70);
+  border: 1.5px solid rgba(255,255,255,.07);
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-family: var(--font-ui);
+  font-size: 13.5px;
+  color: var(--off-white);
+  resize: none;
+  outline: none;
+  max-height: 100px;
+  transition: border-color .15s;
+  line-height: 1.5;
+}
+.chat-input:focus { border-color: var(--a); }
+.chat-input::placeholder { color: var(--ink-30); }
+
+.chat-send {
+  padding: 9px 16px;
+  background: var(--a);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.chat-send:hover { background: var(--a-bright); }
+.chat-send:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ═══════════════════════════
+   MICRO UTILS
+   ═══════════════════════════ */
+.sota-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  background: rgba(245,158,11,.1);
+  border: 1px solid rgba(245,158,11,.2);
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--amber);
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+
+.sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,.1);
+}
+
+svg.icon { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .modules-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 900px) {
+  .lesson-panel { display: none; }
+  .modules-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">
+        <div class="brand-icon">H∇</div>
+        <div class="brand-name">HuyHaha Academy</div>
+      </div>
+      <div class="brand-tagline">Deep Learning Platform</div>
+    </div>
+
+    <div class="sidebar-scroll">
+      <div class="nav-section">
+        <div class="nav-section-label">Chính</div>
+        <button class="nav-btn active" id="nav-home" onclick="showDashboard()">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <span class="nav-label">Tổng quan</span>
+        </button>
+        <button class="nav-btn" id="nav-settings" onclick="showSettings()">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24" class="icon"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span class="nav-label">Cài đặt & API</span>
+        </button>
+      </div>
+
+      <div class="nav-section" id="modulesNav">
+        <div class="nav-section-label">Môn học</div>
+        <!-- Generated by JS -->
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="api-pill" onclick="showSettings()">
+        <div class="api-dot" id="apiDot"></div>
+        <div class="api-text" id="apiText">Kiểm tra API...</div>
+        <div class="api-action">Cài đặt</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════ MAIN ══════════ -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar" id="topbar">
+      <div class="topbar-crumb" id="topbarCrumb">
+        <span class="crumb-current">Tổng quan</span>
+      </div>
+      <div class="view-toggle" id="viewToggle" style="display:none">
+        <button class="view-tab active" onclick="switchView('theory', this)">Lý thuyết</button>
+        <button class="view-tab" onclick="switchView('practice', this)">Thực hành</button>
+      </div>
+      <button class="topbar-action" id="topbarAction" style="display:none" onclick="togglePanel()">Bài tập</button>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="contentArea">
+
+      <!-- ── DASHBOARD PAGE ── -->
+      <div class="page active" id="page-dashboard">
+        <div class="dashboard">
+          <div class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-grid"></div>
+            <div class="hero-content">
+              <div class="hero-eyebrow">Deep Learning Academy</div>
+              <div class="hero-heading">
+                Xin chào, thầy<br><em>HuyHaha</em> 👋
+              </div>
+              <div class="hero-sub">
+                Nền tảng học tập chuyên sâu về AI, Machine Learning và Deep Learning — cập nhật SoTA 2024-25, chấm điểm tự động bằng LLM.
+              </div>
+              <div class="hero-stats" id="heroStats">
+                <!-- filled by JS -->
+              </div>
+            </div>
+          </div>
+
+          <div class="section-head">
+            <div class="section-title">Các môn học</div>
+            <div class="section-count" id="moduleCount">6 modules</div>
+          </div>
+          <div class="modules-grid" id="modulesGrid">
+            <!-- filled by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MODULE PAGE ── -->
+      <div class="page" id="page-module">
+        <div class="module-page">
+          <button class="back-link" onclick="showDashboard()">
+            <svg viewBox="0 0 24 24" class="icon"><polyline points="15 18 9 12 15 6"/></svg>
+            Quay lại tổng quan
+          </button>
+          <div class="module-hero" id="moduleHero"><!-- filled by JS --></div>
+          <div class="section-head">
+            <div class="section-title">Danh sách chủ đề</div>
+            <div class="section-count" id="topicCount"></div>
+          </div>
+          <div class="topic-cards" id="topicCards"><!-- filled by JS --></div>
+        </div>
+      </div>
+
+      <!-- ── LESSON PAGE ── -->
+      <div class="page" id="page-lesson">
+        <div class="lesson-layout" id="lessonLayout">
+          <!-- Left: theory -->
+          <div class="lesson-main" id="lessonMain">
+            <button class="back-link" onclick="goBackModule()">
+              <svg viewBox="0 0 24 24" class="icon"><polyline points="15 18 9 12 15 6"/></svg>
+              <span id="lessonBackLabel">Quay lại</span>
+            </button>
+            <div class="theory-wrap">
+              <div class="lesson-title" id="lessonTitle"></div>
+              <div class="lesson-meta" id="lessonMeta"></div>
+              <div class="concepts-section" id="conceptsSection"></div>
+              <div class="rich-content" id="richContent"></div>
+            </div>
+          </div>
+          <!-- Right: exercises -->
+          <div class="lesson-panel" id="lessonPanel">
+            <div class="panel-header">
+              <div class="panel-title">Bài tập thực hành</div>
+              <div class="panel-counter" id="panelCounter">0 bài</div>
+            </div>
+            <div class="panel-exercise-tabs" id="panelTabs"></div>
+            <div class="panel-body" id="panelBody"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS PAGE ── -->
+      <div class="page" id="page-settings">
+        <div class="settings-page">
+          <div class="settings-heading">Cấu hình & Cài đặt</div>
+          <div class="settings-sub">Cấu hình API key để sử dụng chấm điểm AI và chatbot hỏi đáp</div>
+
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <div class="settings-card-title">OpenRouter API Key</div>
+              <div class="settings-card-desc">
+                Đăng ký miễn phí tại <a href="https://openrouter.ai" target="_blank" style="color:var(--a-bright)">openrouter.ai</a> để lấy API key. Platform sử dụng model <code style="font-family:var(--font-code);font-size:12px;color:var(--a-bright)">google/gemini-flash-1.5</code> cho chấm điểm và chatbot.
+              </div>
+            </div>
+            <div class="settings-card-body">
+              <div class="form-group">
+                <label class="form-label">API Key</label>
+                <input type="password" class="form-input" id="apiKeyInput" placeholder="sk-or-v1-xxxxxxxxxxxxxxxxxxxxxxxx">
+                <div class="form-hint">Key được lưu trên server backend, không lộ ra phía client</div>
+              </div>
+              <button class="btn btn-primary" onclick="saveApiKey()">Lưu API Key</button>
+              <div class="notify" id="apiNotify"></div>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <div class="settings-card-title">Thông tin Platform</div>
+            </div>
+            <div class="settings-card-body">
+              <div class="info-grid">
+                <div class="info-item">
+                  <div class="info-item-label">Phiên bản</div>
+                  <div class="info-item-value">v2.0 — 2025</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-item-label">Tác giả</div>
+                  <div class="info-item-value">Thầy HuyHaha</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-item-label">Chấm điểm AI</div>
+                  <div class="info-item-value">Gemini Flash 1.5</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-item-label">Backend</div>
+                  <div class="info-item-value">FastAPI + Docker</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-item-label">Cập nhật</div>
+                  <div class="info-item-value">SoTA 2024–2025</div>
+                </div>
+                <div class="info-item">
+                  <div class="info-item-label">Ngôn ngữ</div>
+                  <div class="info-item-value">Tiếng Việt</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <div class="settings-card-title">Hướng dẫn chạy Docker</div>
+            </div>
+            <div class="settings-card-body">
+              <pre style="background:var(--ink);border:1px solid rgba(255,255,255,.07);border-radius:var(--r-sm);padding:18px 20px;font-family:var(--font-code);font-size:12.5px;color:#e6edf3;overflow-x:auto;line-height:1.7"># 1. Di chuyển vào thư mục
+cd huy-dl-platform
+
+# 2. (Tùy chọn) Set API key qua .env
+echo "OPENROUTER_API_KEY=sk-or-v1-..." > .env
+
+# 3. Build và chạy
+docker compose up -d
+
+# 4. Truy cập
+# Frontend → http://localhost:3000
+# Backend  → http://localhost:8000/docs</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- ══════════ CHATBOT ══════════ -->
+<div class="chatbot-trigger">
+  <div class="chatbot-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-avatar">H</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Trợ lý DL của thầy HuyHaha</div>
+        <div class="chat-header-status">Sẵn sàng hỗ trợ</div>
+      </div>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-bubble bot">Xin chào! Tôi là AI assistant chuyên về Deep Learning, Machine Learning và NLP. Hỏi tôi bất cứ điều gì về CNN, Transformer, LSTM, RAG, LoRA hay bất kỳ chủ đề nào trong khóa học nhé! 🤖</div>
+    </div>
+    <div class="chat-input-row">
+      <textarea class="chat-input" id="chatInput" rows="1" placeholder="Hỏi về Deep Learning, ML, NLP..." onkeydown="chatKey(event)"></textarea>
+      <button class="chat-send" id="chatSendBtn" onclick="sendMsg()">Gửi</button>
+    </div>
+  </div>
+  <button class="chatbot-fab" id="chatFab" onclick="toggleChat()">AI</button>
+</div>
+
+<script>
+// ══════════════════════════════════════
+// CONSTANTS & STATE
+// ══════════════════════════════════════
+const API = (() => {
+  const h = window.location.hostname;
+  if (h === 'localhost' || h === '127.0.0.1') return 'http://localhost:8000';
+  return ''; // same origin (nginx proxy)
+})();
+
+const STATE = {
+  currentModule: null,
+  currentTopic: null,
+  currentExIdx: 0,
+  panelOpen: true,
+  chatOpen: false,
+  chatHistory: [],
+  curriculum: null,
+};
+
+// ══════════════════════════════════════
+// CURRICULUM DATA
+// ══════════════════════════════════════
+const CURRICULUM = {
+  modules: [
+    {
+      id: 'ml', title: 'ML Fundamentals', color: '#F59E0B', icon: '🧮',
+      sessions: 3, instructor: 'Anh Huy',
+      desc: 'Decision Trees, SVM, Clustering, PCA — nền tảng Machine Learning cổ điển và đánh giá mô hình',
+      topics: [
+        {
+          id: 'dt-svm', title: 'Decision Trees & SVM',
+          theory: {
+            content: `## Decision Trees
+Cây quyết định phân chia dữ liệu theo ngưỡng đặc trưng, tối ưu tiêu chí **Gini Impurity** hoặc **Information Gain**.
+
+**Gini Impurity:** \`G = 1 - Σ pᵢ²\`
+
+**Information Gain:** \`IG = H(parent) - Σ wᵢH(childᵢ)\`
+
+Cây sâu → overfit. Cần **pruning** (max_depth, min_samples_leaf) hoặc **ensemble** methods.
+
+## Support Vector Machine (SVM)
+SVM tìm **hyperplane** tối ưu với **margin** lớn nhất giữa các lớp.
+
+### Kernel Trick
+Ánh xạ dữ liệu lên không gian cao chiều mà không tính toán tường minh:
+- **Linear:** \`K(x,y) = xᵀy\` — dữ liệu linearly separable
+- **RBF (Gaussian):** \`K(x,y) = exp(-γ||x-y||²)\` — phổ biến nhất
+- **Polynomial:** \`K(x,y) = (xᵀy + c)^d\` — cho text classification
+
+### Soft-margin SVM
+Cho phép một số điểm vi phạm margin với **slack variables** ξᵢ. Tham số **C** kiểm soát trade-off.
+
+## Ensemble Methods
+- **Random Forest:** Bootstrap + feature subsampling → giảm variance
+- **Gradient Boosting (XGBoost):** Học tuần tự, sửa lỗi từng bước
+- **LightGBM:** Leaf-wise growth, histogram-based splitting — nhanh hơn XGBoost 10x`,
+            concepts: ['Gini Impurity', 'Information Gain', 'Hyperplane', 'Margin', 'Support Vectors', 'Kernel Trick', 'RBF Kernel', 'Soft Margin', 'Ensemble', 'Pruning', 'Overfitting']
+          },
+          exercises: [
+            {
+              id: 'dt1', title: 'Cài Decision Tree từ đầu (NumPy thuần)',
+              difficulty: 'Trung bình',
+              desc: 'Implement class DecisionTreeClassifier với thuật toán CART: tính Gini Impurity, tìm best split, xây cây đệ quy, predict. Không dùng sklearn.',
+              concepts: ['Gini Impurity', 'recursive splitting', 'leaf node', 'max_depth', 'binary tree'],
+              starter: `import numpy as np
+
+class DecisionTreeClassifier:
+    def __init__(self, max_depth=5, min_samples_split=2):
+        self.max_depth = max_depth
+        self.min_samples_split = min_samples_split
+        self.root = None
+
+    def gini(self, y):
+        # TODO: Tính Gini impurity của y
+        # G = 1 - sum(p_i^2)
+        pass
+
+    def best_split(self, X, y):
+        # TODO: Duyệt mọi feature và threshold
+        # Tìm split có weighted Gini thấp nhất
+        best = {'gain': -1}
+        for feat in range(X.shape[1]):
+            thresholds = np.unique(X[:, feat])
+            for thr in thresholds:
+                left  = y[X[:, feat] <= thr]
+                right = y[X[:, feat] > thr]
+                if len(left) == 0 or len(right) == 0:
+                    continue
+                # TODO: tính weighted gini và lưu nếu tốt hơn
+        return best
+
+    def build(self, X, y, depth=0):
+        # TODO: Đệ quy xây cây
+        # Base cases: max_depth, min_samples, pure node
+        pass
+
+    def fit(self, X, y):
+        self.root = self.build(X, y)
+        return self
+
+    def predict_one(self, x, node):
+        # TODO: Duyệt cây để predict 1 sample
+        pass
+
+    def predict(self, X):
+        return np.array([self.predict_one(x, self.root) for x in X])`,
+              max_score: 10
+            },
+            {
+              id: 'dt2', title: 'So sánh SVM Kernels — Phân tích và Visualize',
+              difficulty: 'Cơ bản',
+              desc: 'Giải thích bản chất của 3 kernel SVM (Linear, RBF, Polynomial). Khi nào dùng kernel nào? Tại sao cần kernel trick? Vẽ decision boundary cho mỗi kernel.',
+              concepts: ['linear kernel', 'RBF kernel', 'polynomial kernel', 'non-linear separability', 'margin', 'support vectors', 'C parameter', 'gamma'],
+              starter: '',
+              max_score: 10
+            }
+          ]
+        },
+        {
+          id: 'cluster-pca', title: 'Clustering & PCA',
+          theory: {
+            content: `## Hierarchical Clustering
+Xây dendrogram bằng cách gộp (agglomerative) hoặc tách (divisive) cụm.
+
+**Linkage criteria:**
+- **Ward:** Tối thiểu hóa tổng variance trong cluster
+- **Complete:** Max distance giữa 2 điểm xa nhất
+- **Average:** Mean pairwise distance
+
+**Cắt dendrogram** tại chiều cao mong muốn → lấy k cluster.
+
+## PCA — Principal Component Analysis
+Giảm chiều bằng cách tìm các hướng có **variance lớn nhất** (principal components).
+
+**Quy trình chuẩn:**
+1. Standardize: \`X_std = (X - μ) / σ\`
+2. Tính covariance matrix: \`C = XᵀX / (n-1)\`
+3. Eigendecomposition: \`C = VΛVᵀ\`
+4. Chọn k eigenvectors ứng với k eigenvalues lớn nhất
+5. Project: \`Z = X_std · V_k\`
+
+**Explained variance ratio** cho biết mỗi PC giữ lại bao nhiêu thông tin.
+
+## Evaluation Metrics
+- **Silhouette Score:** \`s = (b-a)/max(a,b)\` — đo cohesion vs separation
+- **ROC-AUC:** Diện tích dưới ROC curve — khả năng phân biệt lớp
+- **PR Curve:** Phù hợp khi **class imbalance** nặng (fraud detection, medical)`,
+            concepts: ['Dendrogram', 'Linkage', 'Agglomerative', 'Eigenvector', 'Eigenvalue', 'Variance Explained', 'Silhouette Score', 'ROC-AUC', 'Precision-Recall', 'Class Imbalance', 'Standardization']
+          },
+          exercises: [
+            {
+              id: 'pca1', title: 'Implement PCA bằng NumPy',
+              difficulty: 'Trung bình',
+              desc: 'Cài PCA từ đầu bằng NumPy: standardize, covariance matrix, eigendecomposition, project. Áp dụng lên MNIST 784D → 2D, visualize. So sánh với sklearn.',
+              concepts: ['covariance matrix', 'eigendecomposition', 'eigenvectors', 'explained_variance_ratio_', 'projection matrix', 'standardization'],
+              starter: `import numpy as np
+
+class PCA:
+    def __init__(self, n_components):
+        self.n_components = n_components
+        self.components_ = None          # shape: (n_components, n_features)
+        self.explained_variance_ratio_ = None
+        self.mean_ = None
+
+    def fit(self, X):
+        # Step 1: Center data
+        self.mean_ = X.mean(axis=0)
+        X_c = X - self.mean_
+
+        # Step 2: Covariance matrix
+        # TODO: cov = ?
+
+        # Step 3: Eigendecomposition
+        # Gợi ý: np.linalg.eigh (cho symmetric matrix)
+        # TODO: eigenvalues, eigenvectors = ?
+
+        # Step 4: Sort by descending eigenvalue
+        # TODO: ...
+
+        # Step 5: Lưu top n_components
+        self.components_ = ...
+        total = eigenvalues.sum()
+        self.explained_variance_ratio_ = eigenvalues[:self.n_components] / total
+
+    def transform(self, X):
+        X_c = X - self.mean_
+        # TODO: project
+        return X_c @ self.components_.T
+
+    def fit_transform(self, X):
+        self.fit(X)
+        return self.transform(X)`,
+              max_score: 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'nlp', title: 'NLP Deep Learning', color: '#8B5CF6', icon: '💬',
+      sessions: 1, instructor: 'Anh Huy',
+      desc: 'RNN · LSTM · GRU · Transformer · LLM — BERT, GPT, T5 và các kỹ thuật alignment hiện đại',
+      topics: [
+        {
+          id: 'rnn-lstm', title: 'RNN / LSTM / GRU',
+          theory: {
+            content: `## RNN — Recurrent Neural Network
+Xử lý chuỗi bằng cách duy trì **hidden state**:
+
+\`hₜ = tanh(Wₕₕ·hₜ₋₁ + Wₓₕ·xₜ + b)\`
+
+**Vấn đề:** Vanishing gradient khi chuỗi dài → gradient về gần 0 sau ~10 steps → mất thông tin xa.
+
+## LSTM — Long Short-Term Memory (Hochreiter & Schmidhuber, 1997)
+Giải quyết vanishing gradient bằng **cell state** (bộ nhớ dài hạn) và 3 gates:
+
+**Forget gate:** \`fₜ = σ(Wf·[hₜ₋₁, xₜ] + bf)\`
+**Input gate:** \`iₜ = σ(Wi·[hₜ₋₁, xₜ] + bi)\`
+**Cell update:** \`C̃ₜ = tanh(Wc·[hₜ₋₁, xₜ] + bc)\`
+**Cell state:** \`Cₜ = fₜ ⊙ Cₜ₋₁ + iₜ ⊙ C̃ₜ\`
+**Output gate:** \`hₜ = oₜ ⊙ tanh(Cₜ)\`
+
+### Tại sao LSTM giải quyết vanishing gradient?
+Cell state đi qua forget gate với **multiplicative** operation — nếu fₜ ≈ 1, gradient propagates unchanged (identity-like path).
+
+## GRU — Gated Recurrent Unit (Cho et al., 2014)
+Đơn giản hơn LSTM với **2 gates** (Reset, Update):
+
+\`zₜ = σ(Wz·[hₜ₋₁, xₜ])\`  ← Update gate
+\`rₜ = σ(Wr·[hₜ₋₁, xₜ])\`  ← Reset gate
+\`h̃ₜ = tanh(W·[rₜ⊙hₜ₋₁, xₜ])\`
+\`hₜ = (1-zₜ)⊙hₜ₋₁ + zₜ⊙h̃ₜ\`
+
+**GRU vs LSTM:** GRU ít tham số hơn (~25%), thường comparable performance, train nhanh hơn.`,
+            concepts: ['Hidden State', 'Cell State', 'Forget Gate', 'Input Gate', 'Output Gate', 'Vanishing Gradient', 'Gradient Flow', 'Bidirectional LSTM', 'Seq2Seq', 'Packed Sequence', 'Teacher Forcing']
+          },
+          exercises: [
+            {
+              id: 'lstm1', title: 'LSTM Sentiment Analysis — tiếng Việt',
+              difficulty: 'Trung bình',
+              desc: 'Xây dựng Bidirectional LSTM phân loại cảm xúc 3 lớp (positive/negative/neutral) cho văn bản tiếng Việt bằng PyTorch. Xử lý padding, gradient clipping, early stopping.',
+              concepts: ['embedding layer', 'pack_padded_sequence', 'bidirectional LSTM', 'dropout', 'gradient clipping', 'learning rate scheduler', 'F1-macro', 'class imbalance'],
+              starter: `import torch
+import torch.nn as nn
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
+
+class ViSentimentModel(nn.Module):
+    def __init__(self, vocab_size, embed_dim=256,
+                 hidden_dim=256, n_classes=3,
+                 n_layers=2, dropout=0.4):
+        super().__init__()
+        # TODO: Embedding với padding_idx=0
+        self.embedding = nn.Embedding(vocab_size, embed_dim, padding_idx=0)
+
+        # TODO: Bidirectional LSTM (batch_first=True)
+        self.lstm = nn.LSTM(...)
+
+        # TODO: Dropout + Classifier head
+        # Input dim = hidden_dim * 2 (vì bidirectional)
+        self.classifier = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.Linear(hidden_dim * 2, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout / 2),
+            nn.Linear(hidden_dim, n_classes)
+        )
+
+    def forward(self, x, lengths):
+        emb = self.embedding(x)
+        # Pack để LSTM bỏ qua padding
+        packed = pack_padded_sequence(emb, lengths.cpu(),
+                                      batch_first=True,
+                                      enforce_sorted=False)
+        # TODO: LSTM forward
+        # TODO: Unpack và lấy last hidden state (concat 2 directions)
+        # TODO: Classify
+        pass
+
+# Training config:
+# optimizer = AdamW(lr=3e-4, weight_decay=1e-2)
+# scheduler = ReduceLROnPlateau(patience=3)
+# gradient clipping: nn.utils.clip_grad_norm_(model.parameters(), 1.0)`,
+              max_score: 10
+            }
+          ]
+        },
+        {
+          id: 'transformer-bert', title: 'Transformer & BERT Family',
+          theory: {
+            content: `## Transformer — "Attention is All You Need" (Vaswani et al., 2017)
+Loại bỏ hoàn toàn recurrence, thay bằng **attention thuần túy**.
+
+### Scaled Dot-Product Attention
+\`Attention(Q, K, V) = softmax(QKᵀ / √dₖ) · V\`
+
+**Tại sao chia cho √dₖ?** Khi dₖ lớn, dot product phân kỳ → softmax bão hòa → gradient nhỏ. Chia √dₖ giữ variance ~1.
+
+### Multi-Head Attention
+Chạy h attention heads song song trên **subspaces** khác nhau:
+\`MultiHead(Q,K,V) = Concat(head₁,...,headₕ)Wᴼ\`
+
+### Positional Encoding
+\`PE(pos, 2i)   = sin(pos / 10000^(2i/d_model))\`
+\`PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))\`
+
+## BERT (Devlin et al., 2018)
+**Bidirectional Encoder** — pre-train với:
+- **Masked LM (MLM):** Mask 15% tokens, predict chúng
+- **Next Sentence Prediction (NSP)**
+
+Fine-tune: thêm task-specific head.
+
+### PhoBERT — BERT cho tiếng Việt (VinAI, 2020)
+Pre-train trên 20GB văn bản tiếng Việt, tokenize bằng BPE + RDRSegmenter.
+
+## SoTA 2024-2025
+- **Llama 3.3 (70B):** Meta, open-source, top-tier
+- **Qwen2.5 (7B-72B):** Alibaba, hỗ trợ tiếng Việt rất tốt  
+- **Gemini 2.0 Flash:** Google, nhanh + rẻ + context 1M tokens
+- **DeepSeek-R1:** Reasoning mạnh, chain-of-thought tự nhiên`,
+            concepts: ['Self-Attention', 'Multi-Head Attention', 'Query/Key/Value', 'Positional Encoding', '√dₖ Scaling', 'Masked LM', 'Autoregressive', 'Flash Attention', 'RoPE', 'GQA', 'SwiGLU', 'PhoBERT']
+          },
+          exercises: [
+            {
+              id: 'attn1', title: 'Implement Multi-Head Attention từ đầu',
+              difficulty: 'Khó',
+              desc: 'Implement Scaled Dot-Product Attention và Multi-Head Attention bằng PyTorch. Thêm causal masking cho decoder. Visualize attention patterns. Giải thích tại sao chia √dₖ.',
+              concepts: ['Q K V projections', 'scaled dot-product', 'causal mask', 'multi-head concat', 'output projection', 'attention visualization'],
+              starter: `import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import math
+
+class MultiHeadAttention(nn.Module):
+    def __init__(self, d_model: int, n_heads: int, dropout: float = 0.1):
+        super().__init__()
+        assert d_model % n_heads == 0, "d_model phải chia hết n_heads"
+        self.d_k = d_model // n_heads
+        self.n_heads = n_heads
+        self.scale = math.sqrt(self.d_k)
+
+        # TODO: Linear projections W_q, W_k, W_v, W_o
+        self.W_q = nn.Linear(d_model, d_model, bias=False)
+        self.W_k = ...
+        self.W_v = ...
+        self.W_o = ...
+        self.dropout = nn.Dropout(dropout)
+
+    def split_heads(self, x, B, T):
+        # (B, T, d_model) → (B, n_heads, T, d_k)
+        return x.view(B, T, self.n_heads, self.d_k).transpose(1, 2)
+
+    def forward(self, query, key, value, mask=None):
+        B, T_q, _ = query.shape
+        _, T_k, _ = key.shape
+
+        # TODO: Project và split heads
+        Q = self.split_heads(self.W_q(query), B, T_q)
+        K = ...
+        V = ...
+
+        # TODO: Scaled dot-product attention
+        # scores = QKᵀ / sqrt(d_k)   shape: (B, n_heads, T_q, T_k)
+        scores = ...
+
+        # TODO: Apply causal mask nếu có
+        if mask is not None:
+            scores = scores.masked_fill(mask == 0, float('-inf'))
+
+        # TODO: Softmax + dropout + multiply V
+        attn_weights = ...
+        out = ...  # (B, n_heads, T_q, d_k)
+
+        # TODO: Concat heads và output projection
+        out = out.transpose(1,2).contiguous().view(B, T_q, -1)
+        return self.W_o(out), attn_weights`,
+              max_score: 10
+            }
+          ]
+        },
+        {
+          id: 'llm-align', title: 'LLM: SFT · RLHF · PPO · GRPO',
+          theory: {
+            content: `## SFT — Supervised Fine-Tuning
+Fine-tune pre-trained LLM trên **demonstration data** (instruction, response):
+
+**Loss:** \`L_SFT = -Σ log P(yₜ | y₁:ₜ₋₁, x)\`  (next-token prediction chỉ trên response tokens)
+
+### LoRA — Low-Rank Adaptation (Hu et al., 2021)
+Thay vì cập nhật toàn bộ W (d×k), thêm **factorized update**: \`W' = W + αBA\`
+
+Trong đó B ∈ ℝ^{d×r}, A ∈ ℝ^{r×k}, r << min(d,k).
+
+**Tại sao hiệu quả?** Updates trong fine-tuning thường **low-rank intrinsically**. r=8 thường đủ, giảm 90%+ trainable params.
+
+### QLoRA: Quantize base model (4-bit NF4) + LoRA → train trên GPU consumer.
+
+## RLHF — Reinforcement Learning from Human Feedback
+**3 giai đoạn:**
+1. **SFT:** Fine-tune LLM trên demos chất lượng cao
+2. **Reward Model (RM):** Train RM từ **preference data** (ranking pairs)
+3. **PPO:** Optimize policy bằng RM reward, với KL penalty
+
+## PPO — Proximal Policy Optimization
+Clip ratio để tránh update quá lớn:
+\`L_CLIP(θ) = E[min(rₜ(θ)Aₜ, clip(rₜ(θ), 1-ε, 1+ε)Aₜ)]\`
+
+**KL penalty:** \`L = L_CLIP - β·KL(π_θ || π_ref)\`
+
+## GRPO — Group Relative Policy Optimization (DeepSeek, 2024)
+**Key insight:** Loại bỏ critic/value model (tiết kiệm 50% memory).
+
+Thay value function bằng **group-relative advantage**:
+1. Sample G outputs cho mỗi prompt: \`{o₁,...,oG}\`
+2. Tính reward cho mỗi output: \`{r₁,...,rG}\`
+3. Advantage: \`Aᵢ = (rᵢ - mean(r)) / std(r)\`
+
+**DeepSeek-R1** dùng GRPO + verifiable rewards (math, code) → emergent chain-of-thought!`,
+            concepts: ['SFT', 'LoRA rank', 'QLoRA', 'PEFT', 'Reward Model', 'PPO clip ratio', 'GRPO', 'Group Advantage', 'KL Divergence', 'DPO', 'Constitutional AI', 'RLAIF', 'Verifiable Rewards']
+          },
+          exercises: [
+            {
+              id: 'lora1', title: 'Fine-tune LLM với LoRA/QLoRA',
+              difficulty: 'Khó',
+              desc: 'Fine-tune Qwen2.5-1.5B hoặc Llama-3.2-1B cho task Q&A tiếng Việt bằng LoRA. Chọn rank r, target_modules. Giải thích tại sao LoRA hiệu quả về mặt lý thuyết.',
+              concepts: ['LoRA rank r', 'lora_alpha', 'target_modules (q_proj, v_proj)', 'QLoRA 4-bit NF4', 'packing sequences', 'chat template', 'perplexity', 'eval loss'],
+              starter: `from peft import LoraConfig, get_peft_model, TaskType
+from transformers import (AutoModelForCausalLM, AutoTokenizer,
+                           TrainingArguments, BitsAndBytesConfig)
+from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
+import torch
+
+MODEL_NAME = "Qwen/Qwen2.5-1.5B-Instruct"
+
+# ── 1. Load với 4-bit quantization (QLoRA) ──
+bnb_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_quant_type="nf4",      # NF4 tốt hơn INT4 cho LLM
+    bnb_4bit_compute_dtype=torch.bfloat16,
+    bnb_4bit_use_double_quant=True,  # double quantization → tiết kiệm thêm
+)
+
+# TODO: Load model với quant config
+model = AutoModelForCausalLM.from_pretrained(
+    MODEL_NAME,
+    quantization_config=bnb_config,
+    # TODO: thêm device_map, torch_dtype
+)
+
+# ── 2. Cấu hình LoRA ──
+lora_cfg = LoraConfig(
+    r=16,           # Rank — tại sao chọn 16? Thử r=4,8,32
+    lora_alpha=32,  # Scaling = alpha/r = 2 → effective LR multiplier
+    target_modules=["q_proj", "k_proj", "v_proj", "o_proj",
+                    "gate_proj", "up_proj", "down_proj"],
+    lora_dropout=0.05,
+    bias="none",
+    task_type=TaskType.CAUSAL_LM,
+)
+
+# TODO: Apply LoRA và print trainable params
+# model = get_peft_model(model, lora_cfg)
+# model.print_trainable_parameters()
+
+# TODO: Chuẩn bị dataset theo Qwen2.5 chat format
+# TODO: SFTTrainer config với gradient_checkpointing`,
+              max_score: 10
+            },
+            {
+              id: 'grpo1', title: 'So sánh PPO vs GRPO — Phân tích kỹ thuật',
+              difficulty: 'Trung bình',
+              desc: 'Giải thích cơ chế PPO trong RLHF: clip ratio, KL penalty, advantage estimation. Tại sao GRPO (DeepSeek R1) hiệu quả hơn? Phân tích memory, stability, và performance.',
+              concepts: ['critic model', 'value function', 'group sampling', 'relative advantage', 'KL penalty', 'memory efficiency', 'verifiable rewards', 'reward hacking'],
+              starter: '',
+              max_score: 10
+            }
+          ]
+        },
+        {
+          id: 'rag-prompt', title: 'RAG & Prompt Engineering',
+          theory: {
+            content: `## Prompt Engineering
+**Zero-shot:** Không ví dụ — tận dụng pre-trained knowledge.
+**Few-shot:** 2-10 examples trong prompt — cực kỳ hiệu quả với LLM lớn.
+**Chain-of-Thought (CoT):** "Let's think step by step" → emergent reasoning.
+**Self-Consistency:** Sample nhiều CoT paths → majority vote.
+**ReAct:** Reason + Act — LLM xen kẽ suy luận và gọi tool.
+
+## RAG — Retrieval-Augmented Generation (Lewis et al., 2020)
+**Giải quyết:** Hallucination + knowledge cutoff + private knowledge.
+
+**Pipeline chuẩn:**
+1. **Indexing:** \`Document → Chunks → Embed → VectorDB\`
+2. **Retrieval:** \`Query → Embed → Top-k similarity search\`
+3. **Generation:** \`LLM(Context + Query) → Answer\`
+
+### Chunking Strategies
+- **Fixed-size:** 512 tokens, 50 overlap — đơn giản
+- **Semantic:** Tách theo câu/đoạn semantic — chất lượng hơn
+- **Recursive:** RecursiveCharacterTextSplitter — phổ biến nhất
+
+### Embedding Models (tiếng Việt tốt)
+- **BAAI/bge-m3:** Multilingual, 8192 context, hybrid retrieval
+- **text-embedding-3-large:** OpenAI, SOTA
+- **Vietnamese-bi-encoder:** Specialized cho VI
+
+### Advanced RAG
+- **Hybrid Search:** Dense (embedding) + Sparse (BM25) → rerank
+- **HyDE:** Generate hypothetical doc từ query → embed → search
+- **Self-RAG:** LLM tự quyết định khi nào cần retrieve
+
+## Evaluation — RAGAS Metrics
+- **Faithfulness:** Câu trả lời có grounded trong context không?
+- **Answer Relevancy:** Câu trả lời có liên quan đến câu hỏi không?
+- **Context Recall:** Context có chứa đủ thông tin không?`,
+            concepts: ['Zero-shot', 'Few-shot', 'Chain-of-Thought', 'ReAct', 'Embedding', 'Vector DB', 'Cosine Similarity', 'BM25', 'Reranker', 'Chunking', 'Faithfulness', 'RAGAS', 'Function Calling', 'ChromaDB', 'FAISS']
+          },
+          exercises: [
+            {
+              id: 'rag1', title: 'RAG Pipeline cho tài liệu tiếng Việt',
+              difficulty: 'Trung bình',
+              desc: 'Xây RAG system hoàn chỉnh: load PDF, chunk thông minh, embed với bge-m3, lưu ChromaDB, retrieval với hybrid search, generate với LLM. Đánh giá bằng RAGAS.',
+              concepts: ['chunk_size', 'chunk_overlap', 'bge-m3 embedding', 'ChromaDB', 'similarity_search', 'context window', 'faithfulness', 'answer_relevancy', 'context_recall'],
+              starter: `from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_core.prompts import ChatPromptTemplate
+from ragas import evaluate
+from ragas.metrics import faithfulness, answer_relevancy, context_recall
+import os
+
+# ── 1. INDEXING PHASE ──
+def build_index(pdf_path: str, persist_dir: str = "./chroma_db"):
+    # Load PDF
+    loader = PyPDFLoader(pdf_path)
+    docs = loader.load()
+
+    # TODO: Chunk với chiến lược phù hợp
+    # Tại sao chunk_size=512? Tại sao cần overlap?
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=512,
+        chunk_overlap=64,
+        separators=["\\n\\n", "\\n", ". ", " ", ""]
+    )
+    chunks = splitter.split_documents(docs)
+
+    # TODO: Embed với bge-m3 (tốt cho tiếng Việt)
+    embeddings = HuggingFaceBgeEmbeddings(
+        model_name="BAAI/bge-m3",
+        encode_kwargs={"normalize_embeddings": True}
+    )
+
+    # TODO: Tạo và persist ChromaDB
+    vectordb = Chroma.from_documents(chunks, embeddings,
+                                      persist_directory=persist_dir)
+    return vectordb
+
+# ── 2. RETRIEVAL + GENERATION ──
+def rag_query(vectordb, query: str, k: int = 5):
+    # TODO: Retrieve top-k chunks
+    # TODO: Format context
+    # TODO: LLM generate với context
+    # Quan trọng: Prompt phải rõ "Chỉ dựa vào context sau đây..."
+    pass
+
+# ── 3. EVALUATION với RAGAS ──
+# TODO: Chuẩn bị eval dataset (questions, answers, contexts, ground_truth)
+# TODO: evaluate() và phân tích từng metric`,
+              max_score: 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'cv', title: 'Computer Vision', color: '#10B981', icon: '👁️',
+      sessions: 2, instructor: 'Anh Huy',
+      desc: 'CNN · Transfer Learning · YOLO · CRNN · Vietnamese Handwriting Recognition',
+      topics: [
+        {
+          id: 'cnn-transfer', title: 'CNN & Transfer Learning',
+          theory: {
+            content: `## CNN Architecture
+**Convolution:** Filter trượt trên ảnh, học local patterns.
+- **Receptive field:** Vùng ảnh mỗi neuron "nhìn thấy"
+- **Parameter sharing:** Cùng filter trên toàn bộ ảnh → ít params hơn FC
+
+**Batch Normalization:** Normalize activations giữa layers → training nhanh hơn, ít sensitivity đến LR.
+
+**Residual Connections (ResNet):** \`y = F(x) + x\` → gradient highway → train network 100-1000 layers.
+
+## Modern Architectures (2024)
+- **EfficientNet:** Compound scaling (depth + width + resolution)
+- **ConvNeXt V2:** CNN với design principles từ ViT
+- **ViT (Vision Transformer):** Patch → token → Transformer encoder
+- **SwinV2:** Hierarchical ViT, shifted window attention
+
+## Transfer Learning — Best Practices
+**Feature Extraction** (ít data):
+1. Load ImageNet pretrained weights
+2. Freeze toàn bộ backbone
+3. Chỉ train custom head
+
+**Fine-tuning** (đủ data):
+1. Phase 1: Train head với LR = 3e-4 (5-10 epochs)
+2. Phase 2: Unfreeze top layers, LR = 1e-4
+3. Phase 3: Unfreeze toàn bộ, LR = 1e-5 (**discriminative LR**)
+
+**Data Augmentation quan trọng:**
+- **Mixup:** Blend 2 ảnh + labels
+- **CutMix:** Paste patch + blend labels  
+- **RandAugment:** Auto chọn augmentation
+- **Test-Time Augmentation (TTA):** Ensemble predictions`,
+            concepts: ['Convolution', 'Receptive Field', 'Batch Normalization', 'Residual Connection', 'Transfer Learning', 'Feature Extraction', 'Fine-tuning', 'Discriminative LR', 'Mixup', 'CutMix', 'RandAugment', 'EfficientNet', 'ViT']
+          },
+          exercises: [
+            {
+              id: 'cnn1', title: 'Fine-tune EfficientNet — Custom Dataset',
+              difficulty: 'Trung bình',
+              desc: 'Fine-tune EfficientNet-B3 (timm) cho dataset tùy chỉnh (≥5 classes). Phase training: freeze → unfreeze. Mixup augmentation, cosine LR schedule, F1 per-class evaluation.',
+              concepts: ['timm.create_model', 'frozen layers', 'discriminative LR', 'CosineAnnealingLR', 'Mixup', 'class_weights', 'confusion_matrix', 'per-class F1'],
+              starter: `import timm
+import torch
+import torch.nn as nn
+from torch.optim import AdamW
+from torch.optim.lr_scheduler import CosineAnnealingLR
+from torchvision import transforms, datasets
+
+# ── MODEL ──
+class EfficientNetClassifier(nn.Module):
+    def __init__(self, n_classes, model_name='efficientnet_b3', dropout=0.4):
+        super().__init__()
+        self.backbone = timm.create_model(
+            model_name,
+            pretrained=True,
+            num_classes=0,  # Remove original head
+            global_pool='avg'
+        )
+        feat_dim = self.backbone.num_features
+        self.head = nn.Sequential(
+            nn.Dropout(dropout),
+            nn.Linear(feat_dim, feat_dim // 2),
+            nn.SiLU(),
+            nn.Dropout(dropout / 2),
+            nn.Linear(feat_dim // 2, n_classes)
+        )
+
+    def forward(self, x):
+        feat = self.backbone(x)
+        return self.head(feat)
+
+    def freeze_backbone(self):
+        for p in self.backbone.parameters():
+            p.requires_grad = False
+
+    def unfreeze_backbone(self, n_layers=None):
+        # TODO: Unfreeze last n_layers nếu n_layers không None
+        # Ngược lại unfreeze toàn bộ
+        pass
+
+# ── TRAINING PHASES ──
+def train_phase1(model, train_loader, val_loader, epochs=5, lr=3e-4):
+    # Phase 1: Chỉ train head
+    model.freeze_backbone()
+    # TODO: optimizer, scheduler, training loop
+
+def train_phase2(model, train_loader, val_loader, epochs=15, lr=1e-4):
+    # Phase 2: Fine-tune toàn bộ với lr thấp hơn
+    model.unfreeze_backbone()
+    # TODO: discriminative LR groups
+    pass`,
+              max_score: 10
+            }
+          ]
+        },
+        {
+          id: 'yolo', title: 'Object Detection — YOLO11',
+          theory: {
+            content: `## YOLO — You Only Look Once
+**One-stage detector:** Một forward pass → boxes + classes đồng thời.
+
+**YOLO Grid:** Chia ảnh thành S×S grid cells. Mỗi cell predict B boxes.
+
+### YOLO Loss
+\`L = λ_coord·L_box + L_conf + L_cls\`
+- **L_box (CIoU):** Localization loss — penalize center distance, aspect ratio
+- **L_conf:** Objectness confidence
+- **L_cls:** Classification (BCE per class)
+
+## YOLO Evolution (2024)
+| Model | Key Innovation |
+|-------|---------------|
+| YOLOv8 | Anchor-free, C2f bottleneck |
+| YOLOv9 | PGI (Programmable Gradient Info) |
+| YOLOv10 | NMS-free (dual-head), end-to-end |
+| **YOLO11** | Ultralytics 2024, best speed/accuracy |
+
+### Anchor-free Detection
+Predict offsets từ grid points thay vì predefined anchors → đơn giản hơn, không cần cluster anchors.
+
+## Dataset Format (YOLO)
+\`class_id x_center y_center width height\`  (normalized [0,1])
+
+**Mosaic Augmentation:** Ghép 4 ảnh → tăng density, small object detection.
+
+## Metrics
+- **mAP@0.5:** AP tại IoU threshold = 0.5
+- **mAP@0.5:0.95:** COCO standard — average qua IoU 0.5→0.95
+- **FPS:** Inference speed trên hardware chuẩn`,
+            concepts: ['Grid Cell', 'Anchor-free', 'CIoU Loss', 'Objectness', 'mAP@0.5', 'mAP@0.5:0.95', 'NMS', 'IoU threshold', 'Mosaic', 'YOLO format', 'Confidence threshold', 'Precision-Recall curve']
+          },
+          exercises: [
+            {
+              id: 'yolo1', title: 'Train YOLO11 — Custom Object Detection',
+              difficulty: 'Trung bình',
+              desc: 'Chuẩn bị dataset YOLO format, train YOLO11 detect đối tượng tùy chỉnh. Giải thích CIoU loss và NMS. Tune confidence threshold và IoU threshold tối ưu mAP.',
+              concepts: ['YOLO annotation format', 'mosaic augmentation', 'mAP@0.5', 'mAP@0.5:0.95', 'NMS threshold', 'confidence threshold', 'CIoU loss', 'anchor-free'],
+              starter: `from ultralytics import YOLO
+import yaml, os
+
+# ── 1. Cấu trúc dataset ──
+# dataset/
+#   images/train/*.jpg
+#   images/val/*.jpg
+#   labels/train/*.txt   ← mỗi line: class_id cx cy w h (normalized)
+#   labels/val/*.txt
+
+dataset_config = {
+    'path': './dataset',
+    'train': 'images/train',
+    'val':   'images/val',
+    'nc': 3,  # TODO: số classes
+    'names': ['class1', 'class2', 'class3']  # TODO: tên classes
+}
+
+with open('dataset.yaml', 'w') as f:
+    yaml.dump(dataset_config, f)
+
+# ── 2. Load YOLO11 và train ──
+model = YOLO('yolo11n.pt')  # nano: nhỏ nhất, nhanh nhất
+
+results = model.train(
+    data='dataset.yaml',
+    epochs=100,
+    imgsz=640,
+    batch=16,
+    lr0=0.01,           # initial LR
+    lrf=0.01,           # final LR = lr0 * lrf
+    momentum=0.937,
+    weight_decay=5e-4,
+    warmup_epochs=3,
+    mosaic=1.0,         # Mosaic prob
+    mixup=0.1,
+    degrees=10.0,       # rotation
+    # TODO: thêm augmentation params
+    project='runs/detect',
+    name='yolo11-custom',
+    patience=20,        # early stopping
+)
+
+# ── 3. Evaluate ──
+# model.val()  → mAP@50, mAP@50-95
+# model.predict(source='test/', conf=0.25, iou=0.45)
+
+# TODO: Giải thích: tại sao dùng CIoU thay L2 loss?
+# TODO: Tại sao NMS cần thiết? Threshold ảnh hưởng thế nào?`,
+              max_score: 10
+            }
+          ]
+        },
+        {
+          id: 'crnn', title: 'CRNN & Vietnamese OCR',
+          theory: {
+            content: `## CRNN — Convolutional Recurrent Neural Network
+**Pipeline:** Image → CNN Features → Sequence → BiLSTM → CTC Decode → Text
+
+### Architecture Chi Tiết
+1. **CNN Backbone (VGG-like):**
+   - Conv blocks: Conv → BN → ReLU → MaxPool
+   - Output: (B, C, H', W') — W' là sequence length
+   
+2. **Map-to-Sequence:**
+   - Reshape: (B, C*H', W') → chuỗi W' vectors độ dài C*H'
+
+3. **Bidirectional LSTM:**
+   - 2 layers BiLSTM, hidden=256
+   - Capture left-to-right và right-to-left context
+
+4. **CTC Head:** Linear → softmax → n_chars+1 outputs (+blank token)
+
+## CTC — Connectionist Temporal Classification (Graves et al., 2006)
+**Vấn đề:** Chuỗi prediction dài hơn target, không biết alignment.
+
+**Giải pháp:** Tính tổng xác suất tất cả valid alignments:
+\`P(y|x) = Σ_{π∈B⁻¹(y)} P(π|x)\`
+
+**Blank token (-):** Phân tách repeated chars và fill khoảng trống.
+
+**CTC Decode:**
+- **Greedy:** argmax tại mỗi step → collapse (remove blank, merge dups)
+- **Beam Search:** Duy trì top-k sequences → chính xác hơn
+
+## Vietnamese Handwriting — Thách Thức
+- **6 tone marks:** sắc, huyền, hỏi, ngã, nặng, bằng
+- **Dấu phụ trên nguyên âm:** â, ê, ô, ơ, ư, ă, đ
+- **Chữ viết tay đa dạng:** style cá nhân, độ nghiêng
+- **Dataset:** UIT-HWDB, VNOnDB, HANDS-VNOnDB
+
+**Preprocessing:** Deskewing (Hough transform), binarization (Otsu), normalization chiều cao.
+
+## Modern OCR (2024)
+- **PaddleOCR:** Production-ready, tiếng Việt ngay out-of-box
+- **TrOCR:** Microsoft, Transformer-based encoder-decoder
+- **GOT-OCR2.0:** General OCR Theory, SOTA 2024`,
+            concepts: ['CTC Loss', 'Blank Token', 'CTC Decode', 'Beam Search', 'Greedy Decode', 'BiLSTM', 'Feature Map', 'Sequence Projection', 'CER', 'WER', 'Deskewing', 'Binarization', 'Tone Marks']
+          },
+          exercises: [
+            {
+              id: 'crnn1', title: 'Implement CRNN + CTC Loss',
+              difficulty: 'Khó',
+              desc: 'Xây dựng CRNN hoàn chỉnh cho OCR: CNN backbone, map-to-seq, BiLSTM, CTC loss. Implement greedy decoder. Đánh giá CER và WER trên tập test.',
+              concepts: ['CNN backbone', 'feature sequence', 'BiLSTM', 'CTC loss', 'blank token', 'greedy decoder', 'CER calculation', 'edit distance'],
+              starter: `import torch
+import torch.nn as nn
+from torch.nn import CTCLoss
+
+class CRNN(nn.Module):
+    def __init__(self, img_h: int, n_channels: int,
+                 n_classes: int, n_hidden: int = 256):
+        super().__init__()
+
+        # ── CNN Backbone ──
+        # Sequence of Conv-BN-ReLU-Pool blocks
+        # Gợi ý: giảm height (pool theo H), giữ width (sequence dimension)
+        self.cnn = nn.Sequential(
+            # Block 1: (C, H, W) → (64, H/2, W/2)
+            nn.Conv2d(n_channels, 64, 3, padding=1),
+            nn.BatchNorm2d(64), nn.ReLU(inplace=True),
+            nn.MaxPool2d(2, 2),
+
+            # Block 2: → (128, H/4, W/4)
+            nn.Conv2d(64, 128, 3, padding=1),
+            nn.BatchNorm2d(128), nn.ReLU(inplace=True),
+            nn.MaxPool2d(2, 2),
+
+            # TODO: Block 3, 4 — thêm depth, bỏ pool theo width
+            # (256, H/8, W/4), (512, H/16, W/4)
+        )
+
+        # CNN output: (B, 512, H//16, W)
+        # → flatten height: (B, 512 * (img_h//16), W)
+        cnn_out_h = img_h // 16
+        seq_input_dim = 512 * cnn_out_h
+
+        # ── Bidirectional LSTM ──
+        self.lstm = nn.LSTM(
+            input_size=seq_input_dim,
+            hidden_size=n_hidden,
+            num_layers=2,
+            bidirectional=True,
+            batch_first=True,
+            dropout=0.3
+        )
+
+        # ── Output head ──
+        self.fc = nn.Linear(n_hidden * 2, n_classes)  # *2 vì bidirectional
+
+    def forward(self, x):
+        # x: (B, C, H, W)
+        feat = self.cnn(x)              # (B, 512, H', W')
+        B, C, H, W = feat.shape
+        # Reshape: (B, W, C*H) — W là sequence length
+        feat = feat.permute(0, 3, 1, 2).contiguous()
+        feat = feat.view(B, W, C * H)
+        # BiLSTM
+        out, _ = self.lstm(feat)        # (B, W, n_hidden*2)
+        return self.fc(out)             # (B, W, n_classes) — log_probs sau softmax
+
+def ctc_decode_greedy(log_probs, blank_idx=0):
+    """
+    log_probs: (T, n_classes) — output của 1 sample
+    Returns: decoded string as list of class indices
+    """
+    # TODO:
+    # 1. argmax tại mỗi time step
+    # 2. Loại bỏ blank tokens
+    # 3. Merge consecutive duplicates
+    pass
+
+def compute_cer(pred_texts, true_texts):
+    """Tính Character Error Rate trung bình"""
+    # CER = edit_distance(pred, true) / len(true)
+    import editdistance
+    # TODO: implement
+    pass`,
+              max_score: 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'adl', title: 'Applied DL Projects', color: '#EF4444', icon: '🚀',
+      sessions: 2, instructor: 'Anh Huy',
+      desc: 'Chatbot · Agent · Multi-Agent Systems — ứng dụng LLM thực tế với LangGraph',
+      topics: [
+        {
+          id: 'agent', title: 'Agent & Multi-Agent Systems',
+          theory: {
+            content: `## LLM Agents
+**Agent = LLM + Tools + Memory + Planning**
+
+**ReAct (Yao et al., 2022):**
+\`Thought → Action → Observation → Thought → ...\`
+LLM suy luận và gọi tools xen kẽ.
+
+## LangGraph — Stateful Agents
+**Graph-based workflow:** Nodes (functions/LLMs) + Edges (routing) + State (TypedDict).
+
+**Tại sao LangGraph thay vì LangChain agents?**
+- Cycles và branching tường minh
+- Built-in checkpointing (resume sau lỗi)
+- Human-in-the-loop dễ dàng
+- Production-ready
+
+### State Machine Pattern
+\`\`\`
+[START] → agent_node → tool_node → agent_node → [END]
+                ↑_________|
+\`\`\`
+
+## Multi-Agent Architectures
+
+### Supervisor Pattern
+1 **Orchestrator** (LLM) → route tasks → N **Specialist agents**
+- Orchestrator quyết định agent nào làm gì
+- Phù hợp: task có bước rõ ràng
+
+### Peer-to-Peer (Decentralized)
+Agents giao tiếp trực tiếp với nhau.
+
+### Assembly Line (Pipeline)
+Agent 1 → Agent 2 → Agent 3 — xử lý tuần tự.
+
+## Memory Systems
+- **Short-term:** Conversation history trong context
+- **Long-term:** VectorDB (semantic search) + SQL (structured)
+- **Episodic:** Past interactions, user preferences
+- **Procedural:** How-to knowledge, skill library
+
+## Tools & Function Calling
+LLM output structured JSON → execute function → inject result vào context.
+
+**MCP (Model Context Protocol):** Anthropic 2024 — standard protocol for tool calling.`,
+            concepts: ['ReAct', 'Tool Use', 'Function Calling', 'StateGraph', 'Checkpointing', 'Human-in-the-loop', 'Supervisor Pattern', 'Streaming', 'Structured Output', 'MCP', 'Memory', 'Interrupt']
+          },
+          exercises: [
+            {
+              id: 'agent1', title: 'LangGraph Agent với Tools',
+              difficulty: 'Khó',
+              desc: 'Xây AI agent với LangGraph: search web, đọc file, tính toán. Human-in-the-loop cho quyết định quan trọng. Streaming output. Implement Supervisor pattern với 2 specialist agents.',
+              concepts: ['StateGraph', 'ToolNode', 'conditional_edges', 'checkpointing', 'MemorySaver', 'interrupt_before', 'streaming', 'Annotated', 'add_messages'],
+              starter: `from langgraph.graph import StateGraph, START, END
+from langgraph.prebuilt import ToolNode, tools_condition
+from langgraph.checkpoint.memory import MemorySaver
+from langchain_core.tools import tool
+from langchain_core.messages import HumanMessage, AIMessage
+from typing import TypedDict, Annotated
+from langgraph.graph.message import add_messages
+import json
+
+# ── STATE ──
+class AgentState(TypedDict):
+    messages: Annotated[list, add_messages]
+    # TODO: Thêm fields: current_task, tool_results, approved
+
+# ── TOOLS ──
+@tool
+def web_search(query: str) -> str:
+    """Tìm kiếm thông tin trên web"""
+    # TODO: Implement với DuckDuckGo hoặc Tavily
+    return f"Kết quả tìm kiếm cho '{query}': ..."
+
+@tool
+def calculator(expression: str) -> str:
+    """Tính toán biểu thức toán học an toàn"""
+    import ast, operator
+    # TODO: Safe eval — KHÔNG dùng eval() trực tiếp
+    ops = {ast.Add: operator.add, ast.Sub: operator.sub,
+           ast.Mul: operator.mul, ast.Div: operator.truediv}
+    pass
+
+@tool
+def read_file(path: str) -> str:
+    """Đọc nội dung file text"""
+    # TODO: Implement với path validation
+    pass
+
+tools = [web_search, calculator, read_file]
+
+# ── NODES ──
+def agent_node(state: AgentState):
+    """LLM quyết định action tiếp theo"""
+    # TODO: Bind tools với LLM
+    # Gợi ý: llm.bind_tools(tools)
+    pass
+
+def human_review_node(state: AgentState):
+    """Human-in-the-loop: chờ approval"""
+    # TODO: Print current plan
+    # TODO: interrupt để chờ human input
+    pass
+
+# ── GRAPH ──
+builder = StateGraph(AgentState)
+builder.add_node("agent", agent_node)
+builder.add_node("tools", ToolNode(tools))
+builder.add_node("human_review", human_review_node)
+
+# TODO: Thêm edges với conditional routing
+# agent → tools (nếu có tool call)
+# agent → human_review (nếu quyết định quan trọng)
+# agent → END (nếu xong)
+
+checkpointer = MemorySaver()
+graph = builder.compile(
+    checkpointer=checkpointer,
+    interrupt_before=["human_review"]  # Pause trước human review
+)`,
+              max_score: 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'srv', title: 'Server & GitHub', color: '#3B82F6', icon: '🖥️',
+      sessions: 3, instructor: 'Anh Huy',
+      desc: 'SSH · tmux · conda/venv · pip · Git workflow chuyên nghiệp cho ML projects',
+      topics: [
+        {
+          id: 'server', title: 'SSH, tmux, conda, Git',
+          theory: {
+            content: `## SSH & Remote Server
+### Passwordless SSH với Key
+\`\`\`bash
+ssh-keygen -t ed25519 -C "ml-training"   # Tạo key pair
+ssh-copy-id -i ~/.ssh/id_ed25519.pub user@server  # Copy public key
+ssh user@server -p 22                     # Kết nối
+ssh -L 8888:localhost:8888 user@server    # Port forwarding Jupyter
+\`\`\`
+
+### SSH Config (~/.ssh/config)
+\`\`\`
+Host ml-server
+    HostName 192.168.1.100
+    User ubuntu
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+\`\`\`
+→ Chỉ cần: \`ssh ml-server\`
+
+## tmux — Terminal Multiplexer
+**Giữ training chạy khi disconnect!**
+\`\`\`bash
+tmux new -s train          # Tạo session "train"
+tmux attach -t train       # Reconnect
+tmux ls                    # List sessions
+
+Ctrl+B, d    → Detach (session vẫn chạy)
+Ctrl+B, %    → Split vertical
+Ctrl+B, "    → Split horizontal
+Ctrl+B, [    → Scroll mode (q để thoát)
+Ctrl+B, z    → Zoom pane
+\`\`\`
+
+## conda & venv Best Practices
+\`\`\`bash
+# Tạo environment
+conda create -n dl python=3.11 -y
+conda activate dl
+
+# PyTorch với CUDA (quan trọng: match CUDA version!)
+pip install torch==2.3.0 torchvision --index-url https://download.pytorch.org/whl/cu121
+
+# Export environment
+conda env export > environment.yml
+pip freeze > requirements.txt
+
+# Reproduce
+conda env create -f environment.yml
+\`\`\`
+
+## Git Workflow cho ML
+\`\`\`bash
+# Feature branch workflow
+git checkout -b exp/lstm-bidirectional
+git add src/model.py
+git commit -m "feat: Add BiLSTM with attention"
+git push origin exp/lstm-bidirectional
+
+# .gitignore cho ML
+# *.pt *.pth *.ckpt    # Model weights
+# data/raw/            # Raw data
+# wandb/ mlruns/       # Experiment logs
+# __pycache__/ .env    # Python cache & secrets
+\`\`\`
+
+## GPU Monitoring
+\`\`\`bash
+nvidia-smi                    # Snapshot
+nvidia-smi -l 2               # Refresh mỗi 2s
+watch -n 1 nvidia-smi         # Continuous watch
+nvitop                        # Interactive GPU monitor (pip install nvitop)
+\`\`\``,
+            concepts: ['SSH Key', 'Port Forwarding', 'tmux session', 'conda env', 'CUDA version', 'requirements.txt', 'Git branching', '.gitignore', 'nvidia-smi', 'nvitop', 'screen']
+          },
+          exercises: [
+            {
+              id: 'srv1', title: 'Setup Complete ML Development Environment',
+              difficulty: 'Cơ bản',
+              desc: 'Viết bash script setup tự động ML server từ đầu: SSH hardening, conda env, PyTorch CUDA, Jupyter, tmux config. Mô tả quy trình GPU monitoring và troubleshoot OOM.',
+              concepts: ['SSH key auth', 'fail2ban', 'conda create', 'CUDA version match', 'tmux', 'nohup', 'nvidia-smi', 'GPU OOM handling', 'checkpoint saving'],
+              starter: `#!/bin/bash
+# ML Server Setup Script — thầy HuyHaha
+set -euo pipefail
+
+echo "═══════════════════════════════════"
+echo "  ML Server Setup — HuyHaha Academy"
+echo "═══════════════════════════════════"
+
+# ── 1. System Update ──
+apt-get update && apt-get upgrade -y
+apt-get install -y tmux htop nvtop git curl wget build-essential
+
+# ── 2. CUDA Check ──
+echo "CUDA version:"
+nvcc --version 2>/dev/null || echo "CUDA không tìm thấy"
+nvidia-smi 2>/dev/null || echo "GPU không tìm thấy"
+
+# ── 3. Conda ──
+# TODO: Download và install Miniconda
+# TODO: Tạo env 'dl' với Python 3.11
+# TODO: Cài PyTorch matching CUDA version
+
+# ── 4. SSH Hardening ──
+# TODO: Disable password auth, enable key-only
+# CẢNH BÁO: Đảm bảo đã copy SSH key trước khi làm bước này!
+
+# ── 5. tmux config ──
+cat > ~/.tmux.conf << 'EOF'
+# TODO: Viết tmux config với mouse support,
+# vi keys, status bar hiển thị GPU usage
+EOF
+
+# ── 6. Jupyter Setup ──
+# TODO: Cài jupyter lab, cấu hình password, port
+
+echo "Setup hoàn tất!"`,
+              max_score: 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'ops', title: 'MLOps', color: '#F97316', icon: '⚙️',
+      sessions: 4, instructor: 'Anh Huy',
+      desc: 'FastAPI · Docker · MLflow · W&B — deploy và monitor ML models trong production',
+      topics: [
+        {
+          id: 'fastapi', title: 'FastAPI & Docker',
+          theory: {
+            content: `## FastAPI — Production ML API
+### Lifecycle Management (lifespan)
+\`\`\`python
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: load model, init resources
+    app.state.model = load_model("best.pt")
+    app.state.tokenizer = load_tokenizer()
+    yield
+    # Shutdown: cleanup
+    del app.state.model
+
+app = FastAPI(lifespan=lifespan)
+\`\`\`
+
+### Async & Batching
+**Async** cho I/O bound (DB queries, downstream APIs).
+**Batching** cho GPU inference: gom nhiều requests → 1 forward pass.
+
+\`\`\`python
+from asyncio import Queue
+import asyncio
+
+batch_queue = Queue()
+
+async def batch_worker():
+    while True:
+        batch = []
+        # Collect items for 50ms
+        await asyncio.sleep(0.05)
+        while not batch_queue.empty() and len(batch) < 32:
+            batch.append(await batch_queue.get())
+        if batch:
+            results = model.inference_batch([x['input'] for x in batch])
+            for item, result in zip(batch, results):
+                item['future'].set_result(result)
+\`\`\`
+
+## Docker cho ML
+### Multi-stage Build (giảm image size)
+\`\`\`dockerfile
+# Stage 1: Builder
+FROM python:3.11-slim as builder
+WORKDIR /build
+COPY requirements.txt .
+RUN pip install --user -r requirements.txt
+
+# Stage 2: Runtime (không có pip, build tools)
+FROM python:3.11-slim
+WORKDIR /app
+COPY --from=builder /root/.local /root/.local
+COPY . .
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0"]
+\`\`\`
+
+### docker-compose cho Full Stack
+\`\`\`yaml
+services:
+  api:
+    build: ./backend
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, count: 1, capabilities: [gpu]}]
+  redis:
+    image: redis:7-alpine  # For caching
+  frontend:
+    build: ./frontend
+    depends_on: [api]
+\`\`\`
+
+## Production Checklist
+- Health check endpoint \`/health\` với model status
+- Request validation với Pydantic
+- Rate limiting (slowapi)
+- Response caching (Redis)
+- Structured logging (structlog)
+- Metrics endpoint cho Prometheus`,
+            concepts: ['lifespan', 'async/await', 'Pydantic', 'batching', 'multi-stage Docker', 'docker-compose', 'GPU Docker', 'health check', 'rate limiting', 'Redis cache', 'Prometheus metrics']
+          },
+          exercises: [
+            {
+              id: 'api1', title: 'Deploy ML Model — FastAPI + Docker',
+              difficulty: 'Trung bình',
+              desc: 'Wrap PyTorch model vào FastAPI service với async batching, request validation, health check. Multi-stage Dockerfile. docker-compose với redis cache và nginx reverse proxy.',
+              concepts: ['lifespan model loading', 'async batching', 'Pydantic validation', 'multi-stage build', 'health endpoint', 'docker-compose', 'CORS', 'structured logging'],
+              starter: `from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
+from contextlib import asynccontextmanager
+from typing import Optional
+import asyncio, torch, time, logging, structlog
+
+# ── Structured Logging ──
+log = structlog.get_logger()
+
+# ── State ──
+ml_models = {}
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    log.info("startup", event="loading_model")
+    start = time.perf_counter()
+    # TODO: Load model, tokenizer, any preprocessing artifacts
+    ml_models["classifier"] = ...
+    log.info("startup", event="model_loaded",
+             duration_ms=(time.perf_counter()-start)*1000)
+    yield
+    log.info("shutdown")
+    ml_models.clear()
+
+app = FastAPI(
+    title="HuyHaha ML API",
+    version="2.0",
+    lifespan=lifespan
+)
+
+# ── Request/Response Schemas ──
+class PredictRequest(BaseModel):
+    text: str = Field(..., min_length=1, max_length=2000,
+                     description="Input text for classification")
+    language: Optional[str] = Field("vi", pattern="^(vi|en)$")
+
+class PredictResponse(BaseModel):
+    label: str
+    confidence: float
+    latency_ms: float
+
+# ── Batching Queue ──
+# TODO: Implement dynamic batching
+# Gom requests trong 50ms → batch inference → trả về từng request
+
+@app.post("/predict", response_model=PredictResponse)
+async def predict(req: PredictRequest):
+    if "classifier" not in ml_models:
+        raise HTTPException(503, "Model chưa sẵn sàng")
+    # TODO: Preprocess, inference, postprocess
+    pass
+
+@app.get("/health")
+async def health():
+    return {
+        "status": "ok",
+        "model_loaded": "classifier" in ml_models,
+        "device": str(next(ml_models.get("classifier",
+                           torch.nn.Linear(1,1)).parameters()).device)
+        if "classifier" in ml_models else "N/A"
+    }`,
+              max_score: 10
+            }
+          ]
+        },
+        {
+          id: 'tracking', title: 'MLflow & W&B Tracking',
+          theory: {
+            content: `## Tại Sao Cần Experiment Tracking?
+Không tracking → "Lần nào train tốt nhất nhỉ? Config là gì?" 🤦
+
+## MLflow
+\`\`\`python
+import mlflow, mlflow.pytorch
+
+mlflow.set_experiment("sentiment-analysis-vi")
+
+with mlflow.start_run(run_name="lstm-bidirectional-v3"):
+    # Log hyperparameters
+    mlflow.log_params({
+        "lr": 3e-4, "batch_size": 64,
+        "hidden_dim": 256, "n_layers": 2
+    })
+
+    for epoch in range(epochs):
+        # Log metrics mỗi epoch
+        mlflow.log_metrics({
+            "train_loss": train_loss,
+            "val_f1": val_f1,
+            "gpu_mem_gb": torch.cuda.memory_allocated() / 1e9
+        }, step=epoch)
+
+    # Log model với input signature
+    signature = mlflow.models.infer_signature(X_sample, y_sample)
+    mlflow.pytorch.log_model(model, "model", signature=signature)
+
+# Model Registry — lifecycle management
+client = mlflow.tracking.MlflowClient()
+# Promote best model: Staging → Production
+\`\`\`
+
+## Weights & Biases (W&B)
+\`\`\`python
+import wandb
+
+run = wandb.init(
+    project="dl-academy",
+    name="efficientnet-b3-v2",
+    config={"lr": 1e-4, "arch": "efficientnet_b3"},
+    tags=["cv", "classification"]
+)
+
+# Auto-log gradient norms
+wandb.watch(model, log="gradients", log_freq=100)
+
+# Rich logging
+wandb.log({
+    "loss": loss,
+    "confusion_matrix": wandb.plot.confusion_matrix(
+        probs=probs, y_true=labels,
+        class_names=class_names
+    ),
+    "examples": wandb.Image(img, caption=f"pred={pred}")
+})
+
+# Hyperparameter Sweep
+sweep_config = {
+    "method": "bayes",
+    "metric": {"name": "val_f1", "goal": "maximize"},
+    "parameters": {
+        "lr": {"distribution": "log_uniform_values", "min": 1e-5, "max": 1e-3},
+        "dropout": {"values": [0.2, 0.3, 0.4, 0.5]}
+    }
+}
+\`\`\``,
+            concepts: ['Experiment', 'Run', 'Artifact', 'Model Registry', 'Staging/Production', 'Hyperparameter Sweep', 'Bayesian Optimization', 'Gradient Logging', 'wandb.watch', 'Reproducibility', 'Input Signature']
+          },
+          exercises: [
+            {
+              id: 'mlflow1', title: 'Experiment Tracking với MLflow',
+              difficulty: 'Cơ bản',
+              desc: 'Tích hợp MLflow vào training loop: log params, metrics, model, artifacts. So sánh 3+ experiments. Register model tốt nhất vào Model Registry, promote lên Production.',
+              concepts: ['mlflow.start_run', 'log_params', 'log_metrics', 'log_model', 'model signature', 'model registry', 'promote to production', 'experiment comparison'],
+              starter: `import mlflow
+import mlflow.pytorch
+from mlflow.tracking import MlflowClient
+from mlflow.models import infer_signature
+import torch
+
+# ── Setup ──
+mlflow.set_tracking_uri("http://localhost:5000")  # hoặc ./mlruns
+mlflow.set_experiment("sentiment-vi")
+
+def train_and_track(config: dict):
+    """Training loop với MLflow tracking đầy đủ"""
+    with mlflow.start_run(run_name=f"lstm-r{config['r']}-lr{config['lr']:.0e}"):
+        # TODO: Log mọi hyperparameters
+        mlflow.log_params(config)
+
+        model = build_model(config)
+        optimizer = torch.optim.AdamW(model.parameters(), lr=config["lr"])
+        best_val_f1 = 0
+
+        for epoch in range(config["epochs"]):
+            train_loss = train_one_epoch(model, optimizer)
+            val_loss, val_f1 = evaluate(model)
+
+            # TODO: Log metrics với step=epoch
+            mlflow.log_metrics({...}, step=epoch)
+
+            # TODO: Log sample predictions mỗi 5 epochs
+            if epoch % 5 == 0:
+                pass  # wandb.Image hoặc mlflow artifact
+
+            # TODO: Save best checkpoint
+            if val_f1 > best_val_f1:
+                best_val_f1 = val_f1
+                torch.save(model.state_dict(), "best_model.pt")
+
+        # TODO: Log model với signature
+        sample_input = ...
+        signature = infer_signature(sample_input, model(sample_input).detach())
+        mlflow.pytorch.log_model(model, "model", signature=signature)
+
+        # TODO: Set tags
+        mlflow.set_tags({"architecture": "BiLSTM", "lang": "vi"})
+
+        return best_val_f1
+
+# ── Model Registry ──
+def register_best_model(experiment_name: str, metric: str = "val_f1"):
+    client = MlflowClient()
+    # TODO: Query best run
+    # TODO: Register model
+    # TODO: Promote to Production nếu F1 > threshold
+    pass`,
+              max_score: 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// ══════════════════════════════════════
+// MODULE CONFIGS (colors, icons)
+// ══════════════════════════════════════
+const MODULE_COLORS = {
+  ml: '#F59E0B', nlp: '#8B5CF6', cv: '#10B981',
+  adl: '#EF4444', srv: '#3B82F6', ops: '#F97316'
+};
+
+// ══════════════════════════════════════
+// INIT
+// ══════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  STATE.curriculum = CURRICULUM;
+  renderSidebar();
+  renderDashboard();
+  checkApiStatus();
+});
+
+// ══════════════════════════════════════
+// SIDEBAR
+// ══════════════════════════════════════
+function renderSidebar() {
+  const nav = document.getElementById('modulesNav');
+  nav.innerHTML = STATE.curriculum.modules.map(m => `
+    <button class="nav-btn" id="nav-${m.id}" onclick="showModule('${m.id}')">
+      <span class="nav-icon">${m.icon}</span>
+      <span class="nav-label">${m.title}</span>
+      <span class="nav-chip">${m.sessions}b</span>
+    </button>
+  `).join('');
+}
+
+function setActiveNav(id) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const el = document.getElementById(`nav-${id}`);
+  if (el) el.classList.add('active');
+}
+
+// ══════════════════════════════════════
+// PAGE NAVIGATION
+// ══════════════════════════════════════
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(`page-${id}`).classList.add('active');
+  document.getElementById('viewToggle').style.display = 'none';
+  document.getElementById('topbarAction').style.display = 'none';
+}
+
+function setCrumb(parts) {
+  const crumb = document.getElementById('topbarCrumb');
+  if (parts.length === 1) {
+    crumb.innerHTML = `<span class="crumb-current">${parts[0]}</span>`;
+  } else {
+    crumb.innerHTML = parts.map((p, i) => {
+      if (i === parts.length - 1) return `<span class="crumb-current">${p}</span>`;
+      return `<span style="cursor:pointer;color:var(--ink-20)" onclick="${p.onclick || ''}">${p.label || p}</span><span class="crumb-sep">›</span>`;
+    }).join('');
+  }
+}
+
+// ── DASHBOARD ──
+function showDashboard() {
+  showPage('dashboard');
+  setCrumb(['Tổng quan']);
+  setActiveNav('home');
+  STATE.currentModule = null;
+  STATE.currentTopic = null;
+}
+
+// ── MODULE ──
+function showModule(modId) {
+  const mod = CURRICULUM.modules.find(m => m.id === modId);
+  if (!mod) return;
+  STATE.currentModule = mod;
+  STATE.currentTopic = null;
+
+  document.getElementById('moduleHero').innerHTML = `
+    <div class="module-hero-icon" style="background:${mod.color}18;font-size:28px">${mod.icon}</div>
+    <div style="flex:1">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <div class="module-hero-title">${mod.title}</div>
+        <div class="sota-tag">SoTA 2025</div>
+      </div>
+      <div class="module-hero-desc">${mod.desc}</div>
+      <div style="display:flex;gap:20px;margin-top:14px">
+        <span style="font-size:12.5px;color:var(--ink-20)">📖 ${mod.topics.length} chủ đề</span>
+        <span style="font-size:12.5px;color:var(--ink-20)">⏱ ${mod.sessions} buổi</span>
+        <span style="font-size:12.5px;color:var(--ink-20)">💻 ${mod.topics.reduce((s,t)=>s+t.exercises.length,0)} bài tập</span>
+        <span style="font-size:12.5px;color:var(--ink-20)">👤 ${mod.instructor}</span>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('topicCount').textContent = `${mod.topics.length} chủ đề`;
+
+  document.getElementById('topicCards').innerHTML = mod.topics.map((t, i) => {
+    const diffs = [...new Set(t.exercises.map(e => e.difficulty))];
+    return `
+    <div class="topic-card" onclick="showLesson('${mod.id}', '${t.id}')" style="animation-delay:${i*0.07}s">
+      <div class="topic-card-num">${String(i+1).padStart(2,'0')}</div>
+      <div class="topic-card-body">
+        <div class="topic-card-title">${t.title}</div>
+        <div class="topic-card-meta">
+          <div class="topic-card-meta-item">📚 ${t.theory.concepts.length} khái niệm</div>
+          <div class="topic-card-meta-item">💻 ${t.exercises.length} bài tập</div>
+        </div>
+      </div>
+      <div class="topic-card-badges">
+        ${diffs.map(d => `<span class="difficulty-pill ${d==='Cơ bản'?'diff-basic':d==='Trung bình'?'diff-medium':'diff-hard'}">${d}</span>`).join('')}
+      </div>
+      <div class="topic-card-arrow">
+        <svg viewBox="0 0 24 24" class="icon"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+    `;
+  }).join('');
+
+  showPage('module');
+  setCrumb([
+    { label: 'Tổng quan', onclick: 'showDashboard()' },
+    mod.title
+  ]);
+  setActiveNav(modId);
+}
+
+// ── LESSON ──
+function showLesson(modId, topicId) {
+  const mod = CURRICULUM.modules.find(m => m.id === modId);
+  const topic = mod.topics.find(t => t.id === topicId);
+  if (!mod || !topic) return;
+  STATE.currentModule = mod;
+  STATE.currentTopic = topic;
+  STATE.currentExIdx = 0;
+
+  document.getElementById('lessonBackLabel').textContent = `Quay lại ${mod.title}`;
+  document.getElementById('lessonTitle').textContent = topic.title;
+  document.getElementById('lessonMeta').innerHTML = `
+    <div class="lesson-meta-badge" style="color:${mod.color}">${mod.icon} ${mod.title}</div>
+    <div class="sep"></div>
+    <div class="lesson-meta-badge">📚 ${topic.theory.concepts.length} khái niệm</div>
+    <div class="sep"></div>
+    <div class="lesson-meta-badge">💻 ${topic.exercises.length} bài tập</div>
+    <div class="sep"></div>
+    <div class="sota-tag">SoTA 2025</div>
+  `;
+
+  // Concepts
+  document.getElementById('conceptsSection').innerHTML = `
+    <div class="concepts-head">
+      <svg viewBox="0 0 24 24" class="icon" style="width:14px;height:14px"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Khái niệm cốt lõi cần nắm
+    </div>
+    <div class="concepts-tags">
+      ${topic.theory.concepts.map(c => `<span class="concept-tag">${c}</span>`).join('')}
+    </div>
+  `;
+
+  // Theory content
+  document.getElementById('richContent').innerHTML = markdownToHtml(topic.theory.content);
+
+  // Exercises panel
+  renderExercisePanel(topic);
+
+  showPage('lesson');
+  setCrumb([
+    { label: 'Tổng quan', onclick: 'showDashboard()' },
+    { label: mod.title, onclick: `showModule('${mod.id}')` },
+    topic.title
+  ]);
+  setActiveNav(modId);
+
+  // Show view toggle
+  document.getElementById('viewToggle').style.display = 'flex';
+  document.getElementById('topbarAction').style.display = 'block';
+  document.getElementById('topbarAction').textContent = STATE.panelOpen ? 'Ẩn bài tập' : 'Bài tập';
+}
+
+function goBackModule() {
+  if (STATE.currentModule) showModule(STATE.currentModule.id);
+  else showDashboard();
+}
+
+function togglePanel() {
+  STATE.panelOpen = !STATE.panelOpen;
+  const panel = document.getElementById('lessonPanel');
+  panel.classList.toggle('collapsed', !STATE.panelOpen);
+  document.getElementById('topbarAction').textContent = STATE.panelOpen ? 'Ẩn bài tập' : 'Bài tập';
+}
+
+function switchView(view, el) {
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  if (view === 'practice') {
+    document.getElementById('lessonMain').style.display = 'none';
+    document.getElementById('lessonPanel').classList.remove('collapsed');
+    document.getElementById('lessonPanel').style.minWidth = '100%';
+    document.getElementById('lessonPanel').style.width = '100%';
+    STATE.panelOpen = true;
+  } else {
+    document.getElementById('lessonMain').style.display = '';
+    document.getElementById('lessonPanel').style.minWidth = '';
+    document.getElementById('lessonPanel').style.width = '';
+  }
+}
+
+// ── SETTINGS ──
+function showSettings() {
+  showPage('settings');
+  setCrumb(['Cài đặt']);
+  setActiveNav('settings');
+}
+
+// ══════════════════════════════════════
+// DASHBOARD RENDER
+// ══════════════════════════════════════
+function renderDashboard() {
+  const totalTopics = CURRICULUM.modules.reduce((s,m)=>s+m.topics.length,0);
+  const totalEx = CURRICULUM.modules.reduce((s,m)=>s+m.topics.reduce((ss,t)=>ss+t.exercises.length,0),0);
+  const totalConcepts = CURRICULUM.modules.reduce((s,m)=>s+m.topics.reduce((ss,t)=>ss+t.theory.concepts.length,0),0);
+
+  document.getElementById('heroStats').innerHTML = [
+    { v: CURRICULUM.modules.length, s: '+ modules', l: 'Môn học' },
+    { v: totalTopics, s: ' chủ đề', l: 'Bài giảng' },
+    { v: totalEx, s: ' bài tập', l: 'Thực hành' },
+    { v: totalConcepts, s: '+ concepts', l: 'Khái niệm' },
+  ].map(s => `
+    <div class="hero-stat">
+      <div class="hero-stat-value">${s.v}<span>${s.s}</span></div>
+      <div class="hero-stat-label">${s.l}</div>
+    </div>
+  `).join('<div style="width:1px;background:rgba(255,255,255,.07);align-self:stretch;margin:0 4px"></div>');
+
+  document.getElementById('moduleCount').textContent = `${CURRICULUM.modules.length} modules`;
+
+  document.getElementById('modulesGrid').innerHTML = CURRICULUM.modules.map(mod => {
+    const totalEx = mod.topics.reduce((s,t)=>s+t.exercises.length,0);
+    return `
+    <div class="module-card" onclick="showModule('${mod.id}')" style="--accent-c:${mod.color}">
+      <div class="module-card-glow" style="background:${mod.color}"></div>
+      <div class="module-badge" style="background:${mod.color}18;color:${mod.color};border-color:${mod.color}30">
+        <span>${mod.icon}</span> ${mod.instructor}
+      </div>
+      <div class="module-card-title">${mod.title}</div>
+      <div class="module-card-desc">${mod.desc}</div>
+      <div class="module-card-footer">
+        <div class="module-meta-item">
+          <div class="module-meta-value">${mod.topics.length}</div>
+          <div class="module-meta-label">Chủ đề</div>
+        </div>
+        <div class="module-meta-div"></div>
+        <div class="module-meta-item">
+          <div class="module-meta-value">${mod.sessions}</div>
+          <div class="module-meta-label">Buổi học</div>
+        </div>
+        <div class="module-meta-div"></div>
+        <div class="module-meta-item">
+          <div class="module-meta-value">${totalEx}</div>
+          <div class="module-meta-label">Bài tập</div>
+        </div>
+      </div>
+    </div>
+    `;
+  }).join('');
+}
+
+// ══════════════════════════════════════
+// EXERCISE PANEL
+// ══════════════════════════════════════
+function renderExercisePanel(topic) {
+  const exercises = topic.exercises;
+  document.getElementById('panelCounter').textContent = `${exercises.length} bài`;
+
+  // Tabs
+  document.getElementById('panelTabs').innerHTML = exercises.map((ex, i) => `
+    <button class="panel-tab ${i===0?'active':''}" onclick="switchEx(${i}, this)">
+      Bài ${i+1}
+    </button>
+  `).join('');
+
+  if (exercises.length > 0) renderExercise(exercises[0], 0);
+}
+
+function switchEx(idx, el) {
+  STATE.currentExIdx = idx;
+  document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderExercise(STATE.currentTopic.exercises[idx], idx);
+}
+
+function renderExercise(ex, idx) {
+  const diffClass = ex.difficulty === 'Cơ bản' ? 'diff-basic' : ex.difficulty === 'Trung bình' ? 'diff-medium' : 'diff-hard';
+  document.getElementById('panelBody').innerHTML = `
+    <div class="ex-header">
+      <div class="ex-title-row">
+        <div class="ex-title">${ex.title}</div>
+        <span class="difficulty-pill ${diffClass}">${ex.difficulty}</span>
+      </div>
+      <div class="ex-desc">${ex.desc}</div>
+      <div class="ex-concepts">
+        ${ex.concepts.slice(0,5).map(c => `<span class="ex-concept-tag">${c}</span>`).join('')}
+        ${ex.concepts.length > 5 ? `<span class="ex-concept-tag">+${ex.concepts.length-5}</span>` : ''}
+      </div>
+    </div>
+
+    ${ex.starter ? `
+      <div class="code-label">Starter Code</div>
+      <div class="starter-code">${escHtml(ex.starter)}</div>
+    ` : ''}
+
+    <div class="answer-label">Câu trả lời của bạn</div>
+    <textarea class="answer-textarea" id="ans-${ex.id}" placeholder="Nhập câu trả lời, giải thích hoặc code đầy đủ của bạn...&#10;&#10;Gợi ý: Giải thích khái niệm → Mô tả cách implement → Code có comment → Nhận xét kết quả"></textarea>
+
+    <div class="submit-row">
+      <button class="btn btn-primary" id="submit-${ex.id}" onclick="submitEx('${ex.id}')">
+        Chấm điểm AI
+      </button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('ans-${ex.id}').value='';document.getElementById('result-${ex.id}')?.remove()">
+        Xóa
+      </button>
+      <span style="font-size:11px;color:var(--ink-30);margin-left:auto">${ex.max_score} điểm</span>
+    </div>
+    <div id="result-${ex.id}"></div>
+  `;
+}
+
+// ══════════════════════════════════════
+// GRADING
+// ══════════════════════════════════════
+async function submitEx(exId) {
+  const mod = STATE.currentModule;
+  const topic = STATE.currentTopic;
+  const ex = topic.exercises.find(e => e.id === exId);
+  const ansEl = document.getElementById(`ans-${exId}`);
+  const resultEl = document.getElementById(`result-${exId}`);
+  const btn = document.getElementById(`submit-${exId}`);
+
+  const answer = ansEl.value.trim();
+  if (!answer) { ansEl.focus(); ansEl.style.borderColor='var(--red)'; setTimeout(()=>ansEl.style.borderColor='',2000); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Đang chấm...';
+  resultEl.innerHTML = `
+    <div class="grading-card">
+      <div class="grading-loading">
+        <div class="spinner"></div>
+        <div class="loading-text">AI đang đánh giá câu trả lời của bạn...</div>
+      </div>
+    </div>`;
+
+  try {
+    const resp = await fetch(`${API}/api/grade`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question: ex.desc,
+        student_answer: answer,
+        expected_concepts: ex.concepts,
+        max_score: ex.max_score,
+        subject: `${mod.title} — ${topic.title}`
+      })
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json().catch(()=>({detail:'Server error'}));
+      throw new Error(err.detail || `HTTP ${resp.status}`);
+    }
+
+    const data = await resp.json();
+    renderGrade(exId, data);
+  } catch (err) {
+    resultEl.innerHTML = `
+      <div class="grading-card">
+        <div class="grading-body">
+          <div style="color:var(--red);font-size:13px;padding:12px;background:var(--red-bg);border-radius:var(--r-sm);border:1px solid rgba(239,68,68,.2)">
+            Lỗi: ${escHtml(err.message)}.<br>
+            <span style="color:var(--ink-20)">Kiểm tra API Key trong <span style="color:var(--a-bright);cursor:pointer" onclick="showSettings()">Cài đặt</span>.</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Chấm điểm AI';
+}
+
+function renderGrade(exId, data) {
+  const pct = data.score / data.max_score;
+  const scoreColor = pct >= 0.8 ? 'var(--green)' : pct >= 0.5 ? 'var(--amber)' : 'var(--red)';
+  const bd = data.detailed_breakdown || {};
+  const resultEl = document.getElementById(`result-${exId}`);
+
+  resultEl.innerHTML = `
+    <div class="grading-card">
+      <div class="grading-header">
+        <div class="grade-title">Kết quả chấm điểm</div>
+        <div class="score-badge-large">
+          <div class="score-num" style="color:${scoreColor}">${data.score}</div>
+          <div class="score-denom">/ ${data.max_score}</div>
+        </div>
+      </div>
+      <div class="grading-body">
+        <div class="feedback-text">${escHtml(data.feedback)}</div>
+
+        ${Object.keys(bd).length ? `
+          <div class="breakdown-row">
+            <div class="breakdown-cell">
+              <div class="breakdown-val" style="color:var(--a-bright)">${bd.concept_understanding || 0}</div>
+              <div class="breakdown-key">Hiểu KN /40</div>
+            </div>
+            <div class="breakdown-cell">
+              <div class="breakdown-val" style="color:var(--green)">${bd.technical_accuracy || 0}</div>
+              <div class="breakdown-key">Kỹ thuật /40</div>
+            </div>
+            <div class="breakdown-cell">
+              <div class="breakdown-val" style="color:var(--amber)">${bd.completeness || 0}</div>
+              <div class="breakdown-key">Đầy đủ /20</div>
+            </div>
+          </div>
+        ` : ''}
+
+        <div class="feedback-cols">
+          ${data.strengths?.length ? `
+            <div class="feedback-col good">
+              <div class="feedback-col-title good">Điểm mạnh</div>
+              <ul class="feedback-list">
+                ${data.strengths.map(s=>`<li>${escHtml(s)}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+          ${data.improvements?.length ? `
+            <div class="feedback-col improve">
+              <div class="feedback-col-title improve">Cần cải thiện</div>
+              <ul class="feedback-list">
+                ${data.improvements.map(s=>`<li>${escHtml(s)}</li>`).join('')}
+              </ul>
+            </div>
+          ` : ''}
+        </div>
+
+        ${data.missing_concepts?.length ? `
+          <div style="margin-bottom:12px">
+            <div style="font-size:10.5px;font-weight:700;color:var(--ink-20);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Khái niệm chưa đề cập</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              ${data.missing_concepts.map(c=>`<span class="ex-concept-tag" style="border-color:rgba(239,68,68,.25);color:var(--red)">${escHtml(c)}</span>`).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        ${data.encouragement ? `<div class="encouragement">"${escHtml(data.encouragement)}"</div>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════
+// API & SETTINGS
+// ══════════════════════════════════════
+async function checkApiStatus() {
+  try {
+    const r = await fetch(`${API}/api/config-status`);
+    const d = await r.json();
+    const dot = document.getElementById('apiDot');
+    const txt = document.getElementById('apiText');
+    if (d.api_key_configured) {
+      dot.classList.add('ok');
+      txt.textContent = 'API đã cấu hình';
+    } else {
+      dot.classList.remove('ok');
+      txt.textContent = 'Chưa có API Key';
+    }
+  } catch {
+    document.getElementById('apiText').textContent = 'Backend offline';
+  }
+}
+
+async function saveApiKey() {
+  const key = document.getElementById('apiKeyInput').value.trim();
+  const n = document.getElementById('apiNotify');
+  if (!key || key.length < 10) {
+    showNotify(n, 'Vui lòng nhập API key hợp lệ!', 'error'); return;
+  }
+  try {
+    const r = await fetch(`${API}/api/set-api-key`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({api_key: key})
+    });
+    if (!r.ok) throw new Error((await r.json()).detail || 'Error');
+    showNotify(n, 'Đã lưu API key thành công! Chấm điểm và chatbot đã sẵn sàng.', 'success');
+    checkApiStatus();
+  } catch (e) {
+    showNotify(n, `Lỗi: ${e.message}. Đảm bảo backend đang chạy (http://localhost:8000).`, 'error');
+  }
+}
+
+function showNotify(el, msg, type) {
+  el.textContent = msg;
+  el.className = `notify ${type} show`;
+  setTimeout(()=>el.classList.remove('show'), 5000);
+}
+
+// ══════════════════════════════════════
+// CHATBOT
+// ══════════════════════════════════════
+function toggleChat() {
+  STATE.chatOpen = !STATE.chatOpen;
+  const win = document.getElementById('chatWindow');
+  const fab = document.getElementById('chatFab');
+  win.classList.toggle('open', STATE.chatOpen);
+  fab.classList.toggle('open', STATE.chatOpen);
+  fab.textContent = STATE.chatOpen ? '×' : 'AI';
+  if (STATE.chatOpen) document.getElementById('chatInput').focus();
+}
+
+function chatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMsg(); }
+}
+
+async function sendMsg() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  const msgs = document.getElementById('chatMessages');
+  input.value = '';
+  input.style.height = 'auto';
+
+  msgs.innerHTML += `<div class="chat-bubble user">${escHtml(msg)}</div>`;
+  STATE.chatHistory.push({role:'user', content:msg});
+
+  const lid = 'ld-'+Date.now();
+  msgs.innerHTML += `<div class="chat-bubble bot" id="${lid}" style="color:var(--ink-20)"><em>Đang trả lời...</em></div>`;
+  msgs.scrollTop = msgs.scrollHeight;
+
+  const sendBtn = document.getElementById('chatSendBtn');
+  sendBtn.disabled = true;
+
+  try {
+    const ctx = STATE.currentTopic
+      ? `Học sinh đang học: "${STATE.currentTopic.title}" trong module "${STATE.currentModule?.title}"`
+      : '';
+    const r = await fetch(`${API}/api/chat`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        message: msg,
+        history: STATE.chatHistory.slice(-10),
+        context: ctx
+      })
+    });
+    if (!r.ok) { const e=await r.json(); throw new Error(e.detail||`HTTP ${r.status}`); }
+    const d = await r.json();
+    STATE.chatHistory.push({role:'assistant', content:d.response});
+    document.getElementById(lid).outerHTML = `<div class="chat-bubble bot">${renderMdChat(d.response)}</div>`;
+  } catch (e) {
+    document.getElementById(lid).outerHTML = `<div class="chat-bubble bot" style="color:var(--red)">Lỗi: ${escHtml(e.message)}</div>`;
+  }
+
+  sendBtn.disabled = false;
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+// ══════════════════════════════════════
+// MARKDOWN & UTILS
+// ══════════════════════════════════════
+function markdownToHtml(md) {
+  return md
+    .replace(/```(\w*)\n([\s\S]*?)```/g, (_,lang,code) =>
+      `<pre data-lang="${lang||'code'}"><code>${escHtml(code.trimEnd())}</code></pre>`)
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/gs, m => `<ul>${m}</ul>`)
+    .split('\n\n').map(block => {
+      if (block.match(/^<[hup]|^<pre/)) return block;
+      const t = block.trim();
+      if (!t) return '';
+      return `<p>${t}</p>`;
+    }).join('\n');
+}
+
+function renderMdChat(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\n/g, '<br>');
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
