@@ -1,6 +1,6 @@
 # HuyHaha Deep Learning Academy v2 🚀
 
-**Nền tảng học Deep Learning premium** — thiết kế như sản phẩm triệu đô, dành cho khóa học của thầy HuyHaha.
+**Nền tảng học Deep Learning premium** — dành cho khóa học của thầy HuyHaha.
 
 ## Tính năng
 
